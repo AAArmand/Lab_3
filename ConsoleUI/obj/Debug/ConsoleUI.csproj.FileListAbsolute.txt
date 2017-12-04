@@ -1,0 +1,14 @@
+C:\Users\arman\Desktop\proj\C#\GraphicsEditor\ConsoleUI\bin\Debug\ConsoleUI.dll.config
+C:\Users\arman\Desktop\proj\C#\GraphicsEditor\ConsoleUI\bin\Debug\ConsoleUI.dll
+C:\Users\arman\Desktop\proj\C#\GraphicsEditor\ConsoleUI\bin\Debug\ConsoleUI.pdb
+C:\Users\arman\Desktop\proj\C#\GraphicsEditor\ConsoleUI\obj\Debug\ConsoleUI.csprojResolveAssemblyReference.cache
+C:\Users\arman\Desktop\proj\C#\GraphicsEditor\ConsoleUI\obj\Debug\ConsoleUI.csproj.CoreCompileInputs.cache
+C:\Users\arman\Desktop\proj\C#\GraphicsEditor\ConsoleUI\obj\Debug\ConsoleUI.dll
+C:\Users\arman\Desktop\proj\C#\GraphicsEditor\ConsoleUI\obj\Debug\ConsoleUI.pdb
+C:\Users\arman\Desktop\proj\C#\Labs\#3\Lab_3\ConsoleUI\bin\Debug\ConsoleUI.dll.config
+C:\Users\arman\Desktop\proj\C#\Labs\#3\Lab_3\ConsoleUI\bin\Debug\ConsoleUI.dll
+C:\Users\arman\Desktop\proj\C#\Labs\#3\Lab_3\ConsoleUI\bin\Debug\ConsoleUI.pdb
+C:\Users\arman\Desktop\proj\C#\Labs\#3\Lab_3\ConsoleUI\obj\Debug\ConsoleUI.csprojResolveAssemblyReference.cache
+C:\Users\arman\Desktop\proj\C#\Labs\#3\Lab_3\ConsoleUI\obj\Debug\ConsoleUI.csproj.CoreCompileInputs.cache
+C:\Users\arman\Desktop\proj\C#\Labs\#3\Lab_3\ConsoleUI\obj\Debug\ConsoleUI.dll
+C:\Users\arman\Desktop\proj\C#\Labs\#3\Lab_3\ConsoleUI\obj\Debug\ConsoleUI.pdb

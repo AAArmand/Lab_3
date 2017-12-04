@@ -1,0 +1,12 @@
+C:\Users\arman\Desktop\proj\C#\GraphicsEditor\DrawablesUI\bin\Debug\DrawablesUI.dll
+C:\Users\arman\Desktop\proj\C#\GraphicsEditor\DrawablesUI\bin\Debug\DrawablesUI.pdb
+C:\Users\arman\Desktop\proj\C#\GraphicsEditor\DrawablesUI\obj\Debug\DrawablesUI.csprojResolveAssemblyReference.cache
+C:\Users\arman\Desktop\proj\C#\GraphicsEditor\DrawablesUI\obj\Debug\DrawablesUI.csproj.CoreCompileInputs.cache
+C:\Users\arman\Desktop\proj\C#\GraphicsEditor\DrawablesUI\obj\Debug\DrawablesUI.dll
+C:\Users\arman\Desktop\proj\C#\GraphicsEditor\DrawablesUI\obj\Debug\DrawablesUI.pdb
+C:\Users\arman\Desktop\proj\C#\Labs\#3\Lab_3\DrawablesUI\bin\Debug\DrawablesUI.dll
+C:\Users\arman\Desktop\proj\C#\Labs\#3\Lab_3\DrawablesUI\bin\Debug\DrawablesUI.pdb
+C:\Users\arman\Desktop\proj\C#\Labs\#3\Lab_3\DrawablesUI\obj\Debug\DrawablesUI.csprojResolveAssemblyReference.cache
+C:\Users\arman\Desktop\proj\C#\Labs\#3\Lab_3\DrawablesUI\obj\Debug\DrawablesUI.csproj.CoreCompileInputs.cache
+C:\Users\arman\Desktop\proj\C#\Labs\#3\Lab_3\DrawablesUI\obj\Debug\DrawablesUI.dll
+C:\Users\arman\Desktop\proj\C#\Labs\#3\Lab_3\DrawablesUI\obj\Debug\DrawablesUI.pdb
