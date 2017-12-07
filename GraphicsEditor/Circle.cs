@@ -8,9 +8,11 @@ using System.Threading.Tasks;
 
 
 namespace GraphicsEditor {
-    class Circle : ShapeDescription, IShape {
+    class Circle : IShape {
         private Point DotOfCenter { get; set; }
-        
+
+        public string Description { get; set; }
+
         private float Diametr { get; set; }
 
         public FormatInfo Format { get; set; }

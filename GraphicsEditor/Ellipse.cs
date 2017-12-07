@@ -7,8 +7,10 @@ using System.Drawing;
 using DrawablesUI;
 
 namespace GraphicsEditor {
-    class Ellipse : ShapeDescription, IShape {
+    class Ellipse : IShape {
         private Point DotOfCenter { get; set; }
+
+        public string Description { get; set; }
 
         private SizeF Sizes { get; set; }
 

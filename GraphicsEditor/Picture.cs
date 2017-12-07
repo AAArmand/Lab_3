@@ -8,6 +8,7 @@ namespace GraphicsEditor
     {
         private readonly List<IDrawable> shapes = new List<IDrawable>();
         private readonly object lockObject = new object();
+        
         public IEnumerable<IDrawable> Shapes { get { return shapes; } }
 
         public event Action Changed;
@@ -15,7 +16,7 @@ namespace GraphicsEditor
         public void Remove(IDrawable shape)
         {
             lock (lockObject)
-            {
+            {              
                 shapes.Remove(shape);
             }
         }

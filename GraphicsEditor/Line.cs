@@ -7,8 +7,10 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace GraphicsEditor {
-    class Line : ShapeDescription, IShape {
+    class Line : IShape {
         private Point Beginning { get; set; }
+
+        public string Description { get; set; }
 
         private Point End{ get; set; }
 

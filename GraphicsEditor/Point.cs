@@ -7,9 +7,11 @@ using DrawablesUI;
 using System.Drawing;
 
 namespace GraphicsEditor {
-    class Point : ShapeDescription, IShape {
+    class Point : IShape {
 
         public PointF Сoordinates { get;  private set; }
+
+        public string Description { get; set; }
 
         public FormatInfo Format { get; set; }
         

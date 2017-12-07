@@ -27,19 +27,12 @@ namespace GraphicsEditor {
                     throw new FormatException("Команда не принимает параметров");
                 }
                 
-                if (picture.Shapes == null) {
+                if (picture.Shapes.Count() == 0) {
                    throw new NullReferenceException("Не нарисовано ни одной фигуры");
                 }
-
-                /*
-                   Тут должны выводиться названия фигур с индексами, типа такого
-                   [0] Точка(100, 120)
-                   [1] Линия(Точка(100, 120), Точка(400, 420))
-                   [2] Круг(Точка(100, 100), Радиус=50)
-                 */
-
+                
                 int i = 0;
-                foreach (var shape in picture.Shapes) {
+                foreach (IShape shape in picture.Shapes ) {
                     Console.WriteLine("[{0}] {1}", i, shape.Description);
                     i++;
                 }

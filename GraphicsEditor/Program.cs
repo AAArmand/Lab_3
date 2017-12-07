@@ -12,7 +12,7 @@ namespace GraphicsEditor
             Console.OutputEncoding = Encoding.UTF8;
             var picture = new Picture();
             var ui = new DrawableGUI(picture);
-            var app = new Application();
+            var app = new Application();          
 
             app.AddCommand(new ExitCommand(app));
             app.AddCommand(new ExplainCommand(app));
@@ -22,7 +22,7 @@ namespace GraphicsEditor
             app.AddCommand(new EllipseCommand(picture));
             app.AddCommand(new CircleCommand(picture));
             app.AddCommand(new ListCommand(picture));
-            app.AddCommand(new RemoveCommand(picture));
+            //app.AddCommand(new RemoveCommand(picture));
 
 
             picture.Changed += ui.Refresh;

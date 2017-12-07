@@ -29,20 +29,20 @@ namespace GraphicsEditor {
                         throw new ArgumentException("Индекс " + index + " не может быть отрицательным");
                     }
 
-                    if (index >= ListCommand.Shapes.Count) {
+                    /*if (index >= picture.Shapes.Count) {
                         throw new ArgumentException("Не существует фигуры с индексом " + index);
-                    }
+                    }*/
 
                     if (indexes.Contains(index)) {
-                        throw new ArgumentException("Индекс " + index + " уже был удален");
+                        throw new ArgumentException("Индекс " + index + " повторяется");
                     } else {
                         indexes.Add(index);
                     }
                 }
 
-                /*
+                
                 Тут должно быть удаление по индексу
-                 */
+                 
                 int i = 0;
                 foreach (int deleteIndex in indexes) {
                     picture.RemoveAt(deleteIndex - i);
@@ -60,3 +60,4 @@ namespace GraphicsEditor {
         }
     }
 }
+ 
