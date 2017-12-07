@@ -37,9 +37,6 @@ namespace GraphicsEditor {
                 Circle circle = new Circle(Center, Radius);
 
                 picture.Add(circle);
-                //ListCommand.Shapes.Add("Круг" +
-                    "(Точка(" + X + ", " + Y + "), " +
-                    "Радиус = " + Radius + ")", circle);
             } catch (IndexOutOfRangeException) {
                 Console.WriteLine("Вы ввели не все параметры");
             } catch (FormatException) {

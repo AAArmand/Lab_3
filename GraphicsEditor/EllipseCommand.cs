@@ -39,11 +39,6 @@ namespace GraphicsEditor {
                 Ellipse ellipse = new Ellipse(Center, Width, Height, Angle);
 
                 picture.Add(ellipse);
-                ListCommand.Shapes.Add("Эллипс" +
-                    "(Точка(" + X + ", " + Y + "), " +
-                    "Ось a = " + Height + ", " +
-                    "Ocь b = " + Width + ", " +
-                    "Угол поворота = " + Angle + ")", ellipse);
             } catch (IndexOutOfRangeException) {
                 Console.WriteLine("Вы ввели не все параметры");
             } catch (FormatException) {

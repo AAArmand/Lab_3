@@ -32,7 +32,6 @@ namespace GraphicsEditor {
                 
                 Point point = new Point(x, y);
                 picture.Add(point);
-                //ListCommand.Shapes.Add("Точка(" + x + ", " + y + ")", point);
             } catch (IndexOutOfRangeException){
                 Console.WriteLine("Вы ввели не все координаты");
             } catch (FormatException) {

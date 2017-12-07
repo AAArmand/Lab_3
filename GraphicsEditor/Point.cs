@@ -7,14 +7,15 @@ using DrawablesUI;
 using System.Drawing;
 
 namespace GraphicsEditor {
-    class Point : IShape {
+    class Point : ShapeDescription, IShape {
 
-        public PointF Сoordinates { get;  set; }
+        public PointF Сoordinates { get;  private set; }
 
         public FormatInfo Format { get; set; }
         
         public Point(float PointX, float PointY) {
-            Сoordinates = new PointF (PointX,PointY);        
+            Сoordinates = new PointF (PointX, PointY);
+            Description = "Точка(" + Сoordinates.X + ", " + Сoordinates.Y + ")";
         }
 
         public void Draw (IDrawer drawer) {

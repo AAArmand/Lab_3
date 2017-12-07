@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 
 namespace GraphicsEditor {
-    class Circle : IShape {
+    class Circle : ShapeDescription, IShape {
         private Point DotOfCenter { get; set; }
         
         private float Diametr { get; set; }
@@ -18,6 +18,7 @@ namespace GraphicsEditor {
         public Circle(Point Center, float R) {
             DotOfCenter = Center;
             Diametr = 2 * R;
+            Description = "Круг(" + Center.Description + ", " + "Радиус = " + R + ")";
         }
 
         public void Draw(IDrawer drawer) {
