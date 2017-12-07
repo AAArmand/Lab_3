@@ -22,8 +22,8 @@ namespace GraphicsEditor
             app.AddCommand(new EllipseCommand(picture));
             app.AddCommand(new CircleCommand(picture));
             app.AddCommand(new ListCommand(picture));
-            //app.AddCommand(new RemoveCommand(picture));
-
+            app.AddCommand(new RemoveCommand(picture));
+            app.AddCommand(new ColorCommand(picture));
 
             picture.Changed += ui.Refresh;
             ui.Start();

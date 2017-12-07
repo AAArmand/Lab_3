@@ -11,7 +11,7 @@ namespace GraphicsEditor {
     class Circle : IShape {
         private Point DotOfCenter { get; set; }
 
-        public string Description { get; set; }
+        public string Description { get; private set; }
 
         private float Diametr { get; set; }
 

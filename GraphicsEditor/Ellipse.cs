@@ -10,7 +10,7 @@ namespace GraphicsEditor {
     class Ellipse : IShape {
         private Point DotOfCenter { get; set; }
 
-        public string Description { get; set; }
+        public string Description { get; private set; }
 
         private SizeF Sizes { get; set; }
 

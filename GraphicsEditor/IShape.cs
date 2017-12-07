@@ -9,6 +9,6 @@ namespace GraphicsEditor {
     interface IShape : IDrawable{
         FormatInfo Format { get; set; }
 
-        string Description { get; set; }
+        string Description { get; }
     }
 }

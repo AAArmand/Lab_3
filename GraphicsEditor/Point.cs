@@ -11,7 +11,7 @@ namespace GraphicsEditor {
 
         public PointF Сoordinates { get;  private set; }
 
-        public string Description { get; set; }
+        public string Description { get; private set; }
 
         public FormatInfo Format { get; set; }
         

@@ -19,6 +19,12 @@ namespace GraphicsEditor {
             this.picture = picture;
         }
 
+        private void DecrimentArray(ref int[] array) {
+            for (int i = 0; i < array.Length; i++) {
+                array[i]--;
+            }
+        }
+
         public void Execute(params string[] parameters) {
             try {
                 List<int> indexes = new List<int>();
@@ -29,9 +35,9 @@ namespace GraphicsEditor {
                         throw new ArgumentException("Индекс " + index + " не может быть отрицательным");
                     }
 
-                    /*if (index >= picture.Shapes.Count) {
+                    if (index >= picture.Shapes.Count()) {
                         throw new ArgumentException("Не существует фигуры с индексом " + index);
-                    }*/
+                    }
 
                     if (indexes.Contains(index)) {
                         throw new ArgumentException("Индекс " + index + " повторяется");
@@ -39,17 +45,13 @@ namespace GraphicsEditor {
                         indexes.Add(index);
                     }
                 }
+                int[] deleteIndexes = indexes.ToArray();
+                Array.Sort(deleteIndexes);
 
-                
-                Тут должно быть удаление по индексу
-                 
-                int i = 0;
-                foreach (int deleteIndex in indexes) {
-                    picture.RemoveAt(deleteIndex - i);
-                    //ListCommand.Shapes.RemoveAt(deleteIndex - i);
-                    i++;
+                for (int i = 0; i < deleteIndexes.Length; i++) {
+                    picture.RemoveAt(deleteIndexes[i]);
+                    DecrimentArray(ref deleteIndexes);
                 }
-
             } catch (FormatException) {
                 Console.WriteLine("Вы ввели индексы в неверном формате");
             } catch (OverflowException) {
