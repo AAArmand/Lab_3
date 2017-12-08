@@ -51,6 +51,12 @@ namespace GraphicsEditor
             }
         }
 
+        public void OnChanged() {
+            lock (lockObject) {
+                Changed();
+            }
+        }
+
         public void Draw(IDrawer drawer)
         {
             lock (lockObject)

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,13 +7,22 @@ using System.Threading.Tasks;
 
 namespace GraphicsEditor {
     public class FormatInfo {
-        public System.Drawing.Color Color { get; set; }
+        public Color Color { get; set; } = Color.Black;
 
-        public uint Width { get; set; }
-
-        public FormatInfo(System.Drawing.Color color, uint width) {
+        public uint Width { get; set; } = 5;
+        
+        public FormatInfo(Color color, uint width) {
             Color = color;
             Width = width;
         }
+
+        public FormatInfo(Color color) {
+            Color = color;
+        }
+
+        public FormatInfo(uint width) {
+            Width = width;
+        }
+        
     }
 }

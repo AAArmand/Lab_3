@@ -20,7 +20,7 @@ namespace GraphicsEditor {
             Beginning = first;
             End = second;
             Description = "Линия(" + first.Description + ", " + second.Description + ")";
-            Format = new FormatInfo(Color.Black, 5);
+            Format = new FormatInfo(Color.Black);
         }
 
         public void Draw(IDrawer drawer) {

@@ -42,17 +42,15 @@ namespace GraphicsEditor {
                     }
                 }
                 
-                /* тут выбрасывается исключение, о том, 
-                 что коллекцию изменили в процессе выполнения */
                 int i = 0;
                 foreach (IShape shape in picture.Shapes) {
                     if (indexes.Contains(i)) {
                         shape.Format.Color = ColorTranslator.FromHtml(parameters[0]);
-                        picture.Add(i, shape);
-                        picture.RemoveAt((i + 1));
+                        picture.OnChanged();
                     }
                     i++;
                 }
+                
             } catch (FormatException) {
                 Console.WriteLine("Вы ввели индексы в неверном формате");
             } catch (OverflowException) {
