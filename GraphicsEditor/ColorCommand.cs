@@ -46,11 +46,11 @@ namespace GraphicsEditor {
                 foreach (IShape shape in picture.Shapes) {
                     if (indexes.Contains(i)) {
                         shape.Format.Color = ColorTranslator.FromHtml(parameters[0]);
-                        picture.OnChanged();
                     }
                     i++;
                 }
-                
+
+                picture.OnChanged();
             } catch (FormatException) {
                 Console.WriteLine("Вы ввели индексы в неверном формате");
             } catch (OverflowException) {
