@@ -24,6 +24,7 @@ namespace GraphicsEditor
             app.AddCommand(new ListCommand(picture));
             app.AddCommand(new RemoveCommand(picture));
             app.AddCommand(new ColorCommand(picture));
+            app.AddCommand(new WidthCommand(picture));
 
             picture.Changed += ui.Refresh;
             ui.Start();

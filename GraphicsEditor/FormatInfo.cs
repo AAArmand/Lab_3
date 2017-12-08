@@ -24,5 +24,6 @@ namespace GraphicsEditor {
             Width = width;
         }
         
+        public FormatInfo() { }
     }
 }

@@ -21,10 +21,10 @@ namespace GraphicsEditor {
             DotOfCenter = Center;
             Diametr = 2 * R;
             Description = "Круг(" + Center.Description + ", " + "Радиус = " + R + ")";
-            Format = new FormatInfo(Color.Black);
         }
 
         public void Draw(IDrawer drawer) {
+            Format = Format ?? new FormatInfo();
             drawer.SelectPen(Format.Color, Format.Width);
             SizeF Sizes = new SizeF(Diametr, Diametr);
             drawer.DrawEllipseArc(DotOfCenter.Сoordinates, Sizes, 0, 360, 0);
