@@ -20,13 +20,17 @@ namespace GraphicsEditor {
             Beginning = first;
             End = second;
             Description = "Линия(" + first.Description + ", " + second.Description + ")";
+            Format = new FormatInfo();
         }
 
         public void Draw(IDrawer drawer) {
-            Format = Format ?? new FormatInfo();
             drawer.SelectPen(Format.Color, Format.Width);
             drawer.DrawLine(Beginning.Сoordinates, End.Сoordinates);
         }
-        
+
+        public void Transform(Transformation trans) {
+
+        }
+
     }
 }

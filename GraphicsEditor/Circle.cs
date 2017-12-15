@@ -21,13 +21,18 @@ namespace GraphicsEditor {
             DotOfCenter = Center;
             Diametr = 2 * R;
             Description = "Круг(" + Center.Description + ", " + "Радиус = " + R + ")";
+            Format = new FormatInfo();
         }
 
         public void Draw(IDrawer drawer) {
-            Format = Format ?? new FormatInfo();
             drawer.SelectPen(Format.Color, Format.Width);
             SizeF Sizes = new SizeF(Diametr, Diametr);
             drawer.DrawEllipseArc(DotOfCenter.Сoordinates, Sizes, 0, 360, 0);
+        }
+
+        public void Transform(Transformation trans) {
+            DotOfCenter = new Point(trans.TransformMatrix.OffsetX, trans.TransformMatrix.OffsetY);
+            
         }
     }
 }

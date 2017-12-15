@@ -10,5 +10,7 @@ namespace GraphicsEditor {
         FormatInfo Format { get; set; }
 
         string Description { get; }
+
+        void Transform(Transformation trans);
     }
 }

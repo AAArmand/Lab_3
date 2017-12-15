@@ -45,9 +45,11 @@
     <Compile Include="Circle.cs" />
     <Compile Include="CircleCommand.cs" />
     <Compile Include="ColorCommand.cs" />
+    <Compile Include="CompoundShape.cs" />
     <Compile Include="Ellipse.cs" />
     <Compile Include="EllipseCommand.cs" />
     <Compile Include="FormatInfo.cs" />
+    <Compile Include="GroupCommand.cs" />
     <Compile Include="IShape.cs" />
     <Compile Include="Line.cs" />
     <Compile Include="LineCommand.cs" />
@@ -58,6 +60,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RemoveCommand.cs" />
+    <Compile Include="Transformation.cs" />
     <Compile Include="WidthCommand.cs" />
   </ItemGroup>
   <ItemGroup>

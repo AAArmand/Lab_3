@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace GraphicsEditor {
     class Transformation {
-        private Matrix TransformMatrix;
+        public Matrix TransformMatrix { set; get; }
 
         /// Возвращает преобразование поворота на угол angle вокруг точки (0,0)
         public static Transformation Rotate(float angle) {

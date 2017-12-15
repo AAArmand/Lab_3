@@ -31,6 +31,7 @@ namespace GraphicsEditor {
                    throw new NullReferenceException("Не нарисовано ни одной фигуры");
                 }
                 
+
                 int i = 0;
                 foreach (IShape shape in picture.Shapes ) {
                     Console.WriteLine("[{0}] {1}", i, shape.Description);
