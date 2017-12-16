@@ -57,15 +57,12 @@ namespace GraphicsEditor {
 
             } catch (FormatException) {
                 Console.WriteLine("Вы ввели индексы в неверном формате");
-                return null;
             } catch (OverflowException) {
-                Console.WriteLine("Вы ввели слишком большое число в качестве индекса");
-                return null;
+                Console.WriteLine("Вы ввели слишком большое число в качестве индекса");   
             } catch (ArgumentException error) {
-                Console.WriteLine(error.Message);
-                return null;
+                Console.WriteLine(error.Message);              
             }
-
+            return null;
         }
         
         public void Execute(params string[] parameters) {
