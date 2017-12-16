@@ -45,22 +45,19 @@ namespace GraphicsEditor {
 
             } catch (FormatException) {
                 Console.WriteLine("Вы ввели индексы в неверном формате");
-                return null;
             } catch (OverflowException) {
                 Console.WriteLine("Вы ввели слишком большое число в качестве индекса");
-                return null;
             } catch (ArgumentException error) {
-                Console.WriteLine(error.Message);
-                return null;
+                Console.WriteLine(error.Message);      
             }
-
+             return null;
         }
 
         public void Execute(params string[] parameters) {
             try {
                 int[] indexes = ValidateIndexes(parameters);
 
-                if (indexes != null) {
+                if (indexes) {
                     int i = 0;
                     foreach (IShape shape in picture.Shapes) {
                         if (indexes.Contains(i)) {
