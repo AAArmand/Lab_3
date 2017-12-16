@@ -43,15 +43,12 @@ namespace GraphicsEditor {
 
             } catch (FormatException) {
                 Console.WriteLine("Вы ввели индексы в неверном формате");
-                return null;
             } catch (OverflowException) {
                 Console.WriteLine("Вы ввели слишком большое число в качестве индекса");
-                return null;
             } catch (ArgumentException error) {
                 Console.WriteLine(error.Message);
-                return null;
             }
-
+            return null;
         }
 
         public void Execute(params string[] parameters) {
@@ -66,7 +63,7 @@ namespace GraphicsEditor {
 
                 int[] indexes = ValidateIndexes(parameters);
 
-                if (indexes != null) {
+                if (indexes) {
                     CompoundShape compoundShape = new CompoundShape(picture, indexes);
                     picture.Add(compoundShape);
                 } else {
