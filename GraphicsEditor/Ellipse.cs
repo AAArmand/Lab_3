@@ -23,12 +23,16 @@ namespace GraphicsEditor {
             Sizes = new SizeF(Width, Height);
             Rotate = Angle;
             Description = "Эллипс(" + Center.Description + ", " + "Ось a = " + Height + ", " + "Ocь b = " + Width + ", " + "Угол поворота = " + Angle + ")";
+            Format = new FormatInfo();
         }
 
         public void Draw(IDrawer drawer) {
-            Format = Format ?? new FormatInfo();
             drawer.SelectPen(Format.Color, Format.Width);
             drawer.DrawEllipseArc(DotOfCenter.Сoordinates, Sizes, 0, 360, Rotate);
+        }
+
+        public void Transform(Transformation trans) {
+
         }
         
     }

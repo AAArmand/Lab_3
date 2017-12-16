@@ -25,7 +25,14 @@ namespace GraphicsEditor {
             }
         }
 
-        public void Execute(params string[] parameters) {
+        private void DeleteShape(int[] indexes) {
+            for (int i = 0; i < indexes.Length; i++) {
+                picture.RemoveAt(indexes[i]);
+                DecrimentArray(ref indexes);
+            }
+        }
+
+        private int[] ValidateIndexes(string[] parameters) {
             try {
                 List<int> indexes = new List<int>();
                 int index;
@@ -45,20 +52,31 @@ namespace GraphicsEditor {
                         indexes.Add(index);
                     }
                 }
-                int[] deleteIndexes = indexes.ToArray();
-                Array.Sort(deleteIndexes);
 
-                for (int i = 0; i < deleteIndexes.Length; i++) {
-                    picture.RemoveAt(deleteIndexes[i]);
-                    DecrimentArray(ref deleteIndexes);
-                }
+                return indexes.ToArray();
+
             } catch (FormatException) {
                 Console.WriteLine("Вы ввели индексы в неверном формате");
             } catch (OverflowException) {
-                Console.WriteLine("Вы ввели слишком большое число в качестве индекса");
+                Console.WriteLine("Вы ввели слишком большое число в качестве индекса");   
+            } catch (ArgumentException error) {
+                Console.WriteLine(error.Message);              
+            }
+            return null;
+        }
+        
+        public void Execute(params string[] parameters) {
+            try {
+                int[] deleteIndexes = ValidateIndexes(parameters);
+                if (deleteIndexes != null) {
+                    Array.Sort(deleteIndexes);
+                    DeleteShape(deleteIndexes);
+                } else {
+                    throw new ArgumentException("Повторите ввод индексов фигур");
+                }
             } catch (ArgumentException error) {
                 Console.WriteLine(error.Message);
-            } 
+            }
         }
     }
 }

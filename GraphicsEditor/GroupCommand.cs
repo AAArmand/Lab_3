@@ -6,15 +6,15 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace GraphicsEditor {
-    class WidthCommand : ICommand{
+    class GroupCommand : ICommand {
         private Picture picture;
-        public string Name { get { return "width"; } }
+        public string Name { get { return "group"; } }
 
-        public string Help { get { return "Изменяет ширину линий фигуры на заданный"; } }
-        public string Description { get { return "Изменяет ширину линий фигуры. Первый параметр - ширина, последующие - индексы фигур"; } }
-        public string[] Synonyms { get { return new string[] { "breadth", "w" }; } }
+        public string Help { get { return "Группировка фигур"; } }
+        public string Description { get { return "Переносит фигуры, идентификаторы которых перечислены в параметрах, в новую составную фигуру, которая добавляется на картинку"; } }
+        public string[] Synonyms { get { return new string[] { "grouping", "gr" }; } }
 
-        public WidthCommand(Picture picture) {
+        public GroupCommand(Picture picture) {
             this.picture = picture;
         }
 
@@ -22,7 +22,7 @@ namespace GraphicsEditor {
             try {
                 List<int> indexes = new List<int>();
                 int index;
-                foreach (string parametr in parameters.Skip(1)) {
+                foreach (string parametr in parameters) {
                     index = int.Parse(parametr);
                     if (index < 0) {
                         throw new ArgumentException("Индекс " + index + " не может быть отрицательным");
@@ -43,42 +43,40 @@ namespace GraphicsEditor {
 
             } catch (FormatException) {
                 Console.WriteLine("Вы ввели индексы в неверном формате");
-                return null;
             } catch (OverflowException) {
                 Console.WriteLine("Вы ввели слишком большое число в качестве индекса");
-                return null;
             } catch (ArgumentException error) {
                 Console.WriteLine(error.Message);
-                return null;
             }
-
+            return null;
         }
 
         public void Execute(params string[] parameters) {
             try {
+                if (parameters[0] == "") {
+                    throw new FormatException("Команда должна принимать параметры");
+                }
+
+                if (picture.Shapes.Count() == 0) {
+                    throw new NullReferenceException("Не нарисовано ни одной фигуры");
+                }
 
                 int[] indexes = ValidateIndexes(parameters);
 
-                if (indexes != null) {
-                    int i = 0;
-                    foreach (IShape shape in picture.Shapes) {
-                        if (indexes.Contains(i)) {
-                            shape.Format.Width = uint.Parse(parameters[0]);
-                        }
-                        i++;
-                    }
-                    
-                    picture.OnChanged();
+                if (indexes) {
+                    CompoundShape compoundShape = new CompoundShape(picture, indexes);
+                    picture.Add(compoundShape);
                 } else {
-                    throw new ArgumentException("Повторите ввод индексов фигур");
+                    throw new ArgumentException("Введите индексы заново");
                 }
-
+                
+            } catch (FormatException error) {
+                Console.WriteLine(error.Message);
+            } catch (NullReferenceException error) {
+                Console.WriteLine(error.Message);
             } catch (ArgumentException error) {
                 Console.WriteLine(error.Message);
-            } catch (FormatException) {
-                Console.WriteLine("Вы ввели ширину в неверном формате");
-            } catch (OverflowException) {
-                Console.WriteLine("Вы ввели слишком большое число в качестве ширины");
             }
+        }
     }
 }

@@ -18,13 +18,17 @@ namespace GraphicsEditor {
         public Point(float PointX, float PointY) {
             Сoordinates = new PointF (PointX, PointY);
             Description = "Точка(" + Сoordinates.X + ", " + Сoordinates.Y + ")";
+            Format = new FormatInfo();
         }
 
         public void Draw (IDrawer drawer) {
-            Format = Format ?? new FormatInfo();
             drawer.SelectPen(Format.Color, Format.Width);
             drawer.DrawPoint(Сoordinates);         
         }
-        
+
+        public void Transform(Transformation trans) {
+
+        }
+
     }
 }

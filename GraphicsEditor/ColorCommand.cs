@@ -20,9 +20,8 @@ namespace GraphicsEditor {
             this.picture = picture;
         }
 
-        public void Execute(params string[] parameters) {
+        private int[] ValidateIndexes(string[] parameters) {
             try {
-
                 List<int> indexes = new List<int>();
                 int index;
                 foreach (string parametr in parameters.Skip(1)) {
@@ -41,20 +40,36 @@ namespace GraphicsEditor {
                         indexes.Add(index);
                     }
                 }
-                
-                int i = 0;
-                foreach (IShape shape in picture.Shapes) {
-                    if (indexes.Contains(i)) {
-                        shape.Format.Color = ColorTranslator.FromHtml(parameters[0]);
-                    }
-                    i++;
-                }
 
-                picture.OnChanged();
+                return indexes.ToArray();
+
             } catch (FormatException) {
                 Console.WriteLine("Вы ввели индексы в неверном формате");
             } catch (OverflowException) {
                 Console.WriteLine("Вы ввели слишком большое число в качестве индекса");
+            } catch (ArgumentException error) {
+                Console.WriteLine(error.Message);      
+            }
+             return null;
+        }
+
+        public void Execute(params string[] parameters) {
+            try {
+                int[] indexes = ValidateIndexes(parameters);
+
+                if (indexes) {
+                    int i = 0;
+                    foreach (IShape shape in picture.Shapes) {
+                        if (indexes.Contains(i)) {
+                            shape.Format.Color = ColorTranslator.FromHtml(parameters[0]);
+                        }
+                        i++;
+                    }
+                    picture.OnChanged();
+                } else {
+                    throw new ArgumentException("Повторите ввод индексов фигур");
+                }
+                
             } catch (ArgumentException error) {
                 Console.WriteLine(error.Message);
             } catch (Exception) {
