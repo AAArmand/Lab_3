@@ -30,9 +30,6 @@ namespace GraphicsEditor {
             drawer.DrawEllipseArc(DotOfCenter.Сoordinates, Sizes, 0, 360, 0);
         }
 
-        public void Transform(Transformation trans) {
-            DotOfCenter = new Point(trans.TransformMatrix.OffsetX, trans.TransformMatrix.OffsetY);
-            
-        }
+        public void Transform(Transformation trans) {   }
     }
 }
