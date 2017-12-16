@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GraphicsEditor {
     class CompoundShape : IShape {
-        public IList<IShape> Shapes { get; private set; }
+        public List<IShape> Shapes { get; private set; }
 
         public FormatInfo Format { get; set; }
 

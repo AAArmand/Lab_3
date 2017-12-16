@@ -57,7 +57,7 @@ namespace GraphicsEditor {
             try {
                 int[] indexes = ValidateIndexes(parameters);
 
-                if (indexes) {
+                if (indexes!= null) {
                     int i = 0;
                     foreach (IShape shape in picture.Shapes) {
                         if (indexes.Contains(i)) {
