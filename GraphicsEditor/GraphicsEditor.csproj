@@ -48,11 +48,14 @@
     <Compile Include="ColorCommand.cs" />
     <Compile Include="CommandIndex.cs" />
     <Compile Include="CompoundShape.cs" />
+    <Compile Include="Description.cs" />
     <Compile Include="Ellipse.cs" />
     <Compile Include="EllipseCommand.cs" />
     <Compile Include="FormatInfo.cs" />
     <Compile Include="GroupCommand.cs" />
+    <Compile Include="IDescription.cs" />
     <Compile Include="IShape.cs" />
+    <Compile Include="KomplexDescription.cs" />
     <Compile Include="Line.cs" />
     <Compile Include="LineCommand.cs" />
     <Compile Include="ListCommand.cs" />

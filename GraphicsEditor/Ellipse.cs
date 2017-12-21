@@ -7,10 +7,10 @@ using System.Drawing;
 using DrawablesUI;
 
 namespace GraphicsEditor {
-    class Ellipse : IShape {
+    class Ellipse : IShape, IDescription {
         private Point DotOfCenter { get; set; }
 
-        public string Description { get; private set; }
+        public DescriptionData Description { get; private set; }
 
         private SizeF Sizes { get; set; }
 
@@ -22,7 +22,9 @@ namespace GraphicsEditor {
             DotOfCenter = Center;
             Sizes = new SizeF(Width, Height);
             Rotate = Angle;
-            Description = "Эллипс(" + Center.Description + ", " + "Ось a = " + Height + ", " + "Ocь b = " + Width + ", " + "Угол поворота = " + Angle + ")";
+            Description = new DescriptionData("Эллипс(" + Center.Description + ", " + 
+                "Ось a = " + Height + ", " + "Ocь b = " + Width + ", " + 
+                "Угол поворота = " + Angle + ")");
             Format = new FormatInfo();
         }
 

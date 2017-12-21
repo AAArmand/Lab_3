@@ -7,10 +7,10 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace GraphicsEditor {
-    class Line : IShape {
+    class Line : IShape, IDescription {
         private Point Beginning { get; set; }
 
-        public string Description { get; private set; }
+        public DescriptionData Description { get; private set; }
 
         private Point End{ get; set; }
 
@@ -19,7 +19,7 @@ namespace GraphicsEditor {
         public Line(Point first, Point second) {
             Beginning = first;
             End = second;
-            Description = "Линия(" + first.Description + ", " + second.Description + ")";
+            Description = new DescriptionData("Линия(" + first.Description + ", " + second.Description + ")");
             Format = new FormatInfo();
         }
 
