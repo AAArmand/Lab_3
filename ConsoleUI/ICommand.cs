@@ -12,8 +12,8 @@ namespace ConsoleUI
     /// </summary>
     public interface ICommand
     {
-        string GetName();
-        string GetHelp();
+        string Name { get; }
+        string Help { get; }
 
         string GetDescription();
 

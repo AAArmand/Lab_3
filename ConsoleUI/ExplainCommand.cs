@@ -10,9 +10,7 @@ namespace ConsoleUI
     {
         private readonly Application _app;
 
-        public string GetName() { return "explain"; }
-        public string GetHelp() { return "Рассказать о команде или командах"; }
-
+        public string Name => "explain"; public string Help => "Рассказать о команде или командах";
         public string[] Synonyms => new string[] { "elaborate" };
         public string GetDescription() { return "Выводит всю доступную информацию по команде или командам. Имена команд передаются как параметры"; }
 
@@ -24,15 +22,15 @@ namespace ConsoleUI
                 ICommand cmd = _app.FindCommand(parameter);
                 Console.WriteLine(Line);
                 List<string> syns = new List<string>(cmd.Synonyms);
-                if (cmd.GetName() == parameter)
+                if (cmd.Name== parameter)
                 {
-                    Console.WriteLine("{0}: {1}", cmd.GetName(), cmd.GetHelp());
+                    Console.WriteLine("{0}: {1}", cmd.Name, cmd.Help);
                 }
                 else
                 {
-                    Console.WriteLine("{0}: {1}", parameter, cmd.GetHelp());
+                    Console.WriteLine("{0}: {1}", parameter, cmd.Help);
                     syns.Remove(parameter);
-                    syns.Add(cmd.GetName());
+                    syns.Add(cmd.Name);
                 }
                 if (syns.Count > 0)
                 {

@@ -10,9 +10,7 @@ namespace GraphicsEditor {
 
         private readonly Picture _picture;
 
-        public string GetName() { return "line"; }
-        public string GetHelp() { return "Рисует отрезок в графическом интерфейсе"; }
-
+        public string Name => "line"; public string Help => "Рисует отрезок в графическом интерфейсе";
         public string GetDescription() { return "Рисует отрезок от одной точки до другой, в качестве параметра - две пары координат точек"; }
 
         public string[] Synonyms => new string[] { "segment", "offcut" };

@@ -6,50 +6,53 @@ namespace ConsoleUI
 {
     public class Application
     {
-        NotFoundCommand notFound = new NotFoundCommand();
-        bool keepRunning = true;
-        List<ICommand> commands = new List<ICommand>();
-        Dictionary<string, ICommand> commandMap = new Dictionary<string, ICommand>();
+        private readonly NotFoundCommand _notFound = new NotFoundCommand();
+        private bool _keepRunning = true;
+        readonly List<ICommand> _commands = new List<ICommand>();
+        readonly Dictionary<string, ICommand> _commandMap = new Dictionary<string, ICommand>();
 
         public void Exit()
         {
-            keepRunning = false;
+            _keepRunning = false;
         }
 
         public ICommand FindCommand(string name)
         {
-            if (commandMap.ContainsKey(name))
+            if (_commandMap.ContainsKey(name))
             {
-                return commandMap[name];
+                return _commandMap[name];
             }
-            notFound.SetName(name);
-            return notFound;
+            NotFound.SetName(name);
+            return NotFound;
         }
 
-        public IList<ICommand> Commands { get { return commands; } }
+        public IList<ICommand> Commands => _commands;
+
+        internal NotFoundCommand NotFound => _notFound;
+
         public void AddCommand(ICommand cmd)
         {
-            commands.Add(cmd);
-            if (commandMap.ContainsKey(cmd.GetName()))
+            _commands.Add(cmd);
+            if (_commandMap.ContainsKey(cmd.Name))
             {
-                throw new Exception(String.Format("Команда {0} уже добавлена", cmd.GetName()));
+                throw new Exception($"Команда {cmd.Name} уже добавлена");
             }
-            commandMap.Add(cmd.GetName(), cmd);
+            _commandMap.Add(cmd.Name, cmd);
             foreach (var s in cmd.Synonyms)
             {
-                if (commandMap.ContainsKey(s))
+                if (_commandMap.ContainsKey(s))
                 {
-                    Console.WriteLine("ERROR: Игнорирую синоним {0} для команды {1}, поскольку имя {0}  уже использовано", s, cmd.GetName());
+                    Console.WriteLine("ERROR: Игнорирую синоним {0} для команды {1}, поскольку имя {0}  уже использовано", s, cmd.Name);
                     continue;
                 }
-                commandMap.Add(s, cmd);
+                _commandMap.Add(s, cmd);
             }
         }
     
         public void Run(TextReader reader)
         {
             string[] cmdline, parameters;
-            while (keepRunning)
+            while (_keepRunning)
             {
                 Console.Write("> ");
                 var cmd = reader.ReadLine();

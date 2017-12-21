@@ -12,9 +12,7 @@ namespace GraphicsEditor {
     class ListCommand : ICommand{
         private readonly Picture _picture;
 
-        public string GetName() { return "list"; }
-        public string GetHelp() { return "Выводит список фигур на картинке"; }
-
+        public string Name => "list"; public string Help => "Выводит список фигур на картинке";
         public string GetDescription() { return "Выводит список фигур на картинке, не принимает параметров"; }
 
         public string[] Synonyms => new string[] { "bill", "roll" };

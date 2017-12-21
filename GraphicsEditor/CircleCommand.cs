@@ -9,9 +9,7 @@ namespace GraphicsEditor {
     class CircleCommand : ICommand {
         private readonly Picture _picture;
 
-        public string GetName() { return "circle"; }
-        public string GetHelp() { return "Рисует круг в графическом интерфейсе"; }
-
+        public string Name => "circle"; public string Help => "Рисует круг в графическом интерфейсе";
         public string GetDescription() { return "Рисует круг. Параметры — координаты центра круга и радиус"; }
 
         public string[] Synonyms => new string[] { "lap", "disk" };

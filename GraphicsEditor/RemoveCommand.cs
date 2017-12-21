@@ -7,9 +7,7 @@ using System.Threading.Tasks;
 
 namespace GraphicsEditor {
     class RemoveCommand :CommandIndex, ICommand {
-        public string GetName() { return "remove"; }
-        public string GetHelp() { return "Удаляет фигуры с картинки"; }
-
+        public string Name => "remove"; public string Help => "Удаляет фигуры с картинки";
         public string GetDescription() { return "Удаляет фигуры с картинки. Параметры команды — индексы элементов, которые нужно удалить с картинки"; }
 
         public string[] Synonyms => new string[] { "delete", "cut" };

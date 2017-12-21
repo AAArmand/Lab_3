@@ -11,9 +11,7 @@ namespace ConsoleUI
         private readonly Application _app;
         private const string Line = "================================================";
 
-        public string GetName() { return "help"; }
-        public string GetHelp() { return "Краткая помощь по всем командам"; }
-
+        public string Name => "help"; public string Help => "Краткая помощь по всем командам";
         public string[] Synonyms => new string[] { "?" };
         public string GetDescription() { return "Выводит список  команд с краткой помощью"; }
 
@@ -25,7 +23,7 @@ namespace ConsoleUI
 
             foreach (ICommand cmd in _app.Commands)
             {
-                Console.WriteLine("{0}: {1}", cmd.GetName(), cmd.GetHelp());
+                Console.WriteLine("{0}: {1}", cmd.Name, cmd.Help);
             }
 
             Console.WriteLine(Line);

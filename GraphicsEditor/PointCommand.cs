@@ -12,9 +12,7 @@ namespace GraphicsEditor {
 
         private readonly Picture _picture;
 
-        public string GetName() { return "point"; }
-        public string GetHelp() { return "Рисует точку в графическом интерфейсе"; }
-
+        public string Name => "point"; public string Help => "Рисует точку в графическом интерфейсе";
         public string GetDescription() { return "Рисует точку с координатами, задаваемыми пользователем"; }
 
         public string[] Synonyms => new string[] { "dot", "pt" };

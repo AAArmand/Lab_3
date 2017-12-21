@@ -10,22 +10,19 @@ namespace ConsoleUI
     {
         private string _name;
 
-        public string GetName() {
-            return _name;
-        }
+        public string Name => _name;
 
         public void SetName(string value) {
             _name = value;
         }
 
-        public string GetHelp() { return "команда не найдена"; }
-
+        public string Help => "команда не найдена";
         public string[] Synonyms => new string[] { };
         public string GetDescription() { return ""; }
 
         public void Execute(params string[] parameters)
         {
-            Console.WriteLine("Команда `{0}`  не найдена ", GetName());
+            Console.WriteLine("Команда `{0}`  не найдена ", Name);
         }
     }
 

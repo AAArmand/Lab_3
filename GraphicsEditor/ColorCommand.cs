@@ -9,9 +9,7 @@ using DrawablesUI;
 
 namespace GraphicsEditor {
     class ColorCommand :CommandIndex, ICommand {
-        public string GetName() { return "color"; }
-        public string GetHelp() { return "Изменяет цвет линий фигуры на заданный"; }
-
+        public string Name => "color"; public string Help => "Изменяет цвет линий фигуры на заданный";
         public string GetDescription() { return "Изменяет цвет линий фигуры. Первый параметр - название цвета, последующие - индексы фигур"; }
 
         public string[] Synonyms => new string[] { "coloring", "colouring" };

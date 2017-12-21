@@ -7,9 +7,7 @@ using System.Threading.Tasks;
 
 namespace GraphicsEditor {
     class WidthCommand : CommandIndex, ICommand {
-        public string GetName() { return "width"; }
-        public string GetHelp() { return "Изменяет ширину линий фигуры на заданный"; }
-
+        public string Name => "width"; public string Help => "Изменяет ширину линий фигуры на заданный";
         public string GetDescription() { return "Изменяет ширину линий фигуры. Первый параметр - ширина, последующие - индексы фигур"; }
 
         public string[] Synonyms => new string[] { "breadth", "w" };

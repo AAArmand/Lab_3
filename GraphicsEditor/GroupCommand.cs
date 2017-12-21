@@ -7,10 +7,8 @@ using System.Threading.Tasks;
 
 namespace GraphicsEditor {
     class GroupCommand : CommandIndex, ICommand {
-        
-        public string GetName() { return "group"; }
-        public string GetHelp() { return "Группировка фигур"; }
 
+        public string Name => "group"; public string Help => "Группировка фигур";
         public string GetDescription() { return "Переносит фигуры, идентификаторы которых перечислены в параметрах, в новую составную фигуру, которая добавляется на картинку"; }
 
         public string[] Synonyms => new string[] { "grouping", "gr" };

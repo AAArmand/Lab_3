@@ -9,10 +9,8 @@ namespace ConsoleUI
     public class ExitCommand : ICommand
     {
         private readonly Application _app;
-        
-        public string GetName() { return "exit"; }
-        public string GetHelp() { return "Выход из программы"; }
 
+        public string Name => "exit"; public string Help => "Выход из программы";
         public string[] Synonyms => new string[] { "quit", "bye" };
         public string GetDescription() { return "Длинное и подробное описание команды выхода "; }
 

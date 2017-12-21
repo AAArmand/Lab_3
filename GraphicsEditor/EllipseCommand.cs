@@ -9,9 +9,7 @@ namespace GraphicsEditor {
     class EllipseCommand : ICommand{
         private readonly Picture _picture;
 
-        public string GetName() { return "ellipse"; }
-        public string GetHelp() { return "Рисует эллипс в графическом интерфейсе"; }
-
+        public string Name => "ellipse"; public string Help => "Рисует эллипс в графическом интерфейсе";
         public string GetDescription() { return "Рисует эллипс. Параметры — координаты точки центра эллипса, размеры осей эллипса, угол поворота эллипса"; }
 
         public string[] Synonyms => new string[] { "oval", "egg" };
