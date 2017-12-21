@@ -8,34 +8,27 @@ namespace ConsoleUI
 {
     public class HelpCommand : ICommand
     {
-        Application app;
-        private const string line = "================================================";
+        private readonly Application _app;
+        private const string Line = "================================================";
 
-        public string Name { get { return "help"; } }
-        public string Help { get { return "Краткая помощь по всем командам"; } }
-        public string[] Synonyms
-        {
-            get { return new string[] { "?" }; }
-        }
-        public string Description
-        {
-            get { return "Выводит список  команд с краткой помощью"; }
-        }
+        public string GetName() { return "help"; }
+        public string GetHelp() { return "Краткая помощь по всем командам"; }
 
-        public HelpCommand(Application app)
-        {
-            this.app = app;
-        }
+        public string[] Synonyms => new string[] { "?" };
+        public string GetDescription() { return "Выводит список  команд с краткой помощью"; }
+
+        public HelpCommand(Application app) => this._app = app ?? throw new ArgumentNullException(nameof(app));
+
         public void Execute(params string[] parameters)
         {
-            Console.WriteLine(line);
+            Console.WriteLine(Line);
 
-            foreach (ICommand cmd in app.Commands)
+            foreach (ICommand cmd in _app.Commands)
             {
-                Console.WriteLine("{0}: {1}", cmd.Name, cmd.Help);
+                Console.WriteLine("{0}: {1}", cmd.GetName(), cmd.GetHelp());
             }
 
-            Console.WriteLine(line);
+            Console.WriteLine(Line);
         }
 
         

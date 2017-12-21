@@ -7,30 +7,30 @@ using System.Threading.Tasks;
 
 namespace GraphicsEditor {
     class GroupCommand : CommandIndex, ICommand {
-        public GroupCommand(Picture picture) : base(picture) {
-        }
+        
+        public string GetName() { return "group"; }
+        public string GetHelp() { return "Группировка фигур"; }
 
-        public string Name { get { return "group"; } }
+        public string GetDescription() { return "Переносит фигуры, идентификаторы которых перечислены в параметрах, в новую составную фигуру, которая добавляется на картинку"; }
 
-        public string Help { get { return "Группировка фигур"; } }
-        public string Description { get { return "Переносит фигуры, идентификаторы которых перечислены в параметрах, в новую составную фигуру, которая добавляется на картинку"; } }
-        public string[] Synonyms { get { return new string[] { "grouping", "gr" }; } }
+        public string[] Synonyms => new string[] { "grouping", "gr" };
 
-       
+        public GroupCommand(Picture picture) : base(picture) { }
+    
         public void Execute(params string[] parameters) {
             try {
                 if (parameters[0] == "") {
                     throw new FormatException("Команда должна принимать параметры");
                 }
 
-                if (picture.Shapes.Count() == 0) {
+                if (!Picture.Shapes.Any()) {
                     throw new NullReferenceException("Не нарисовано ни одной фигуры");
                 }
 
                 int[] indexes = ValidateIndexes(parameters);           
                 if (indexes != null) {
-                    CompoundShape compoundShape = new CompoundShape(picture, indexes);
-                    picture.Add(compoundShape);
+                    CompoundShape compoundShape = new CompoundShape(Picture, indexes);
+                    Picture.Add(compoundShape);
                 } else {
                     throw new ArgumentException("Введите индексы заново");
                 }

@@ -7,16 +7,15 @@ using System.Threading.Tasks;
 
 namespace GraphicsEditor {
     class EllipseCommand : ICommand{
-        private Picture picture;
-        public string Name { get { return "ellipse"; } }
+        private readonly Picture _picture;
 
-        public string Help { get { return "Рисует эллипс в графическом интерфейсе"; } }
-        public string Description { get { return "Рисует эллипс. Параметры — координаты точки центра эллипса, размеры осей эллипса, угол поворота эллипса"; } }
-        public string[] Synonyms { get { return new string[] { "oval", "egg" }; } }
+        public string GetName() { return "ellipse"; }
+        public string GetHelp() { return "Рисует эллипс в графическом интерфейсе"; }
 
-        public EllipseCommand(Picture picture) {
-            this.picture = picture;
-        }
+        public string GetDescription() { return "Рисует эллипс. Параметры — координаты точки центра эллипса, размеры осей эллипса, угол поворота эллипса"; }
+
+        public string[] Synonyms => new string[] { "oval", "egg" };
+        public EllipseCommand(Picture picture) => this._picture = picture ?? throw new ArgumentNullException(nameof(picture));
 
         public void Execute(params string[] parameters) {
             try {
@@ -24,21 +23,21 @@ namespace GraphicsEditor {
                     throw new ArgumentException("Команда принимает только 5 параметров");
                 }
 
-                float X = float.Parse(parameters[0]);
-                float Y = float.Parse(parameters[1]);
-                Point Center = new Point(X, Y);
+                float x = float.Parse(parameters[0]);
+                float y = float.Parse(parameters[1]);
+                Point center = new Point(x, y);
 
-                float Height = float.Parse(parameters[2]);
-                float Width = float.Parse(parameters[3]);
+                float height = float.Parse(parameters[2]);
+                float width = float.Parse(parameters[3]);
 
-                if ((Height <= 0) || (Width <= 0)) {
+                if ((height <= 0) || (width <= 0)) {
                     throw new InvalidOperationException("Длина оси эллипса должна быть больше 0");
                 }
 
-                float Angle = float.Parse(parameters[4]);
-                Ellipse ellipse = new Ellipse(Center, Width, Height, Angle);
+                float angle = float.Parse(parameters[4]);
+                Ellipse ellipse = new Ellipse(center, width, height, angle);
 
-                picture.Add(ellipse);
+                _picture.Add(ellipse);
             } catch (IndexOutOfRangeException) {
                 Console.WriteLine("Вы ввели не все параметры");
             } catch (FormatException) {

@@ -7,15 +7,15 @@ using System.Threading.Tasks;
 
 namespace GraphicsEditor {
     class WidthCommand : CommandIndex, ICommand {
-        public string Name { get { return "width"; } }
+        public string GetName() { return "width"; }
+        public string GetHelp() { return "Изменяет ширину линий фигуры на заданный"; }
 
-        public string Help { get { return "Изменяет ширину линий фигуры на заданный"; } }
-        public string Description { get { return "Изменяет ширину линий фигуры. Первый параметр - ширина, последующие - индексы фигур"; } }
-        public string[] Synonyms { get { return new string[] { "breadth", "w" }; } }
+        public string GetDescription() { return "Изменяет ширину линий фигуры. Первый параметр - ширина, последующие - индексы фигур"; }
 
-        public WidthCommand(Picture picture) : base(picture) {
-            this.picture = picture;
-        }
+        public string[] Synonyms => new string[] { "breadth", "w" };
+
+        public WidthCommand(Picture picture) : base(picture) { }
+
         public void Execute(params string[] parameters) {
             try {
 
@@ -23,14 +23,14 @@ namespace GraphicsEditor {
 
                 if (indexes != null) {
                     int i = 0;
-                    foreach (IShape shape in picture.Shapes) {
+                    foreach (IShape shape in Picture.Shapes) {
                         if (indexes.Contains(i)) {
                             shape.Format.Width = uint.Parse(parameters[0]);
                         }
                         i++;
                     }
 
-                    picture.OnChanged();
+                    Picture.OnChanged();
                 } else {
                     throw new ArgumentException("Повторите ввод индексов фигур");
                 }

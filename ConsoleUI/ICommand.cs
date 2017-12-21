@@ -12,10 +12,13 @@ namespace ConsoleUI
     /// </summary>
     public interface ICommand
     {
-        string Name { get; }
-        string Help { get; }
-        string Description { get; }
+        string GetName();
+        string GetHelp();
+
+        string GetDescription();
+
         string[] Synonyms { get; }
+
         void Execute(params string[] parameters);
     }
 }

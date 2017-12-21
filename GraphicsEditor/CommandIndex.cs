@@ -7,28 +7,34 @@ using System.Threading.Tasks;
 namespace GraphicsEditor {
     abstract class CommandIndex {
 
-        protected Picture picture;
-        public CommandIndex(Picture picture) {
-            this.picture = picture;
-        }
+        protected Picture Picture;
+
+        protected CommandIndex(Picture picture) => this.Picture = picture ?? throw new ArgumentNullException(nameof(picture));
 
         protected int[] ValidateIndexes(string[] parameters) {
             try {
                 List<int> indexes = new List<int>();
-                int index;
-                foreach (string parametr in parameters) {
-                    index = int.Parse(parametr);
-                    if (index < 0) {
+
+                foreach (string parametr in parameters)
+                {
+                    int index = int.Parse(parametr);
+
+                    if (index < 0)
+                    {
                         throw new ArgumentException("Индекс " + index + " не может быть отрицательным");
                     }
 
-                    if (index >= picture.Shapes.Count()) {
+                    if (index >= Picture.Shapes.Count())
+                    {
                         throw new ArgumentException("Не существует фигуры с индексом " + index);
                     }
 
-                    if (indexes.Contains(index)) {
+                    if (indexes.Contains(index))
+                    {
                         throw new ArgumentException("Индекс " + index + " повторяется");
-                    } else {
+                    }
+                    else
+                    {
                         indexes.Add(index);
                     }
                 }

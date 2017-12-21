@@ -8,55 +8,47 @@ namespace ConsoleUI
 {
     public class ExplainCommand : ICommand
     {
-        Application app;
+        private readonly Application _app;
 
-        public string Name { get { return "explain"; } }
-        public string Help { get { return "Рассказать о команде или командах"; } }
-        public string[] Synonyms
-        {
-            get { return new string[] { "elaborate" }; }
-        }
-        public string Description
-        {
-            get { return "Выводит всю доступную информацию по команде или командам. Имена команд передаются как параметры"; }
-        }
+        public string GetName() { return "explain"; }
+        public string GetHelp() { return "Рассказать о команде или командах"; }
 
-        public ExplainCommand(Application app)
-        {
-            this.app = app;
-        }
+        public string[] Synonyms => new string[] { "elaborate" };
+        public string GetDescription() { return "Выводит всю доступную информацию по команде или командам. Имена команд передаются как параметры"; }
+
+        public ExplainCommand(Application app) => this._app = app ?? throw new ArgumentNullException(nameof(app));
         public void Execute(params string[] parameters)
         {
             foreach (var parameter in parameters)
             {
-                ICommand cmd = app.FindCommand(parameter);
-                Console.WriteLine(line);
+                ICommand cmd = _app.FindCommand(parameter);
+                Console.WriteLine(Line);
                 List<string> syns = new List<string>(cmd.Synonyms);
-                if (cmd.Name == parameter)
+                if (cmd.GetName() == parameter)
                 {
-                    Console.WriteLine("{0}: {1}", cmd.Name, cmd.Help);
+                    Console.WriteLine("{0}: {1}", cmd.GetName(), cmd.GetHelp());
                 }
                 else
                 {
-                    Console.WriteLine("{0}: {1}", parameter, cmd.Help);
+                    Console.WriteLine("{0}: {1}", parameter, cmd.GetHelp());
                     syns.Remove(parameter);
-                    syns.Add(cmd.Name);
+                    syns.Add(cmd.GetName());
                 }
                 if (syns.Count > 0)
                 {
                     Console.WriteLine("Синонимы: {0}", string.Join(", ", syns));
                 }
-                if (cmd.Description != string.Empty)
+                if (cmd.GetDescription() != string.Empty)
                 {
-                    Console.WriteLine(line1);
-                    Console.WriteLine(cmd.Description);
+                    Console.WriteLine(Line1);
+                    Console.WriteLine(cmd.GetDescription());
                 }
             }
-            Console.WriteLine(line);
+            Console.WriteLine(Line);
         }
 
-        private const string line = "================================================";
-        private const string line1 = "...............................................";
+        private const string Line = "================================================";
+        private const string Line1 = "...............................................";
 
     }
 

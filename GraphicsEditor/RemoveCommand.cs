@@ -7,15 +7,13 @@ using System.Threading.Tasks;
 
 namespace GraphicsEditor {
     class RemoveCommand :CommandIndex, ICommand {
-        
-        public string Name { get { return "remove"; } }
+        public string GetName() { return "remove"; }
+        public string GetHelp() { return "Удаляет фигуры с картинки"; }
 
-        public string Help { get { return "Удаляет фигуры с картинки"; } }
-        public string Description { get { return "Удаляет фигуры с картинки. Параметры команды — индексы элементов, которые нужно удалить с картинки"; } }
-        public string[] Synonyms { get { return new string[] { "delete", "cut" }; } }
+        public string GetDescription() { return "Удаляет фигуры с картинки. Параметры команды — индексы элементов, которые нужно удалить с картинки"; }
 
-        public RemoveCommand(Picture picture):base(picture) {
-        }
+        public string[] Synonyms => new string[] { "delete", "cut" };
+        public RemoveCommand(Picture picture):base(picture) { }
 
         private void DecrimentArray(ref int[] array) {
             for (int i = 0; i < array.Length; i++) {
@@ -25,7 +23,7 @@ namespace GraphicsEditor {
 
         private void DeleteShape(int[] indexes) {
             for (int i = 0; i < indexes.Length; i++) {
-                picture.RemoveAt(indexes[i]);
+                Picture.RemoveAt(indexes[i]);
                 DecrimentArray(ref indexes);
             }
         }

@@ -22,7 +22,7 @@ namespace ConsoleUI
             {
                 return commandMap[name];
             }
-            notFound.Name = name;
+            notFound.SetName(name);
             return notFound;
         }
 
@@ -30,16 +30,16 @@ namespace ConsoleUI
         public void AddCommand(ICommand cmd)
         {
             commands.Add(cmd);
-            if (commandMap.ContainsKey(cmd.Name))
+            if (commandMap.ContainsKey(cmd.GetName()))
             {
-                throw new Exception(String.Format("Команда {0} уже добавлена", cmd.Name));
+                throw new Exception(String.Format("Команда {0} уже добавлена", cmd.GetName()));
             }
-            commandMap.Add(cmd.Name, cmd);
+            commandMap.Add(cmd.GetName(), cmd);
             foreach (var s in cmd.Synonyms)
             {
                 if (commandMap.ContainsKey(s))
                 {
-                    Console.WriteLine("ERROR: Игнорирую синоним {0} для команды {1}, поскольку имя {0}  уже использовано", s, cmd.Name);
+                    Console.WriteLine("ERROR: Игнорирую синоним {0} для команды {1}, поскольку имя {0}  уже использовано", s, cmd.GetName());
                     continue;
                 }
                 commandMap.Add(s, cmd);

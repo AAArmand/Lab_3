@@ -7,16 +7,15 @@ using System.Threading.Tasks;
 
 namespace GraphicsEditor {
     class CircleCommand : ICommand {
-        private Picture picture;
-        public string Name { get { return "circle"; } }
+        private readonly Picture _picture;
 
-        public string Help { get { return "Рисует круг в графическом интерфейсе"; } }
-        public string Description { get { return "Рисует круг. Параметры — координаты центра круга и радиус"; } }
-        public string[] Synonyms { get { return new string[] { "lap", "disk" }; } }
+        public string GetName() { return "circle"; }
+        public string GetHelp() { return "Рисует круг в графическом интерфейсе"; }
 
-        public CircleCommand(Picture picture) {
-            this.picture = picture;
-        }
+        public string GetDescription() { return "Рисует круг. Параметры — координаты центра круга и радиус"; }
+
+        public string[] Synonyms => new string[] { "lap", "disk" };
+        public CircleCommand(Picture picture) => this._picture = picture ?? throw new ArgumentNullException(nameof(picture));
 
         public void Execute(params string[] parameters) {
             try {
@@ -24,19 +23,19 @@ namespace GraphicsEditor {
                     throw new ArgumentException("Команда принимает только 3 параметра");
                 }
 
-                float X = float.Parse(parameters[0]);
-                float Y = float.Parse(parameters[1]);
-                Point Center = new Point(X, Y);
+                float x = float.Parse(parameters[0]);
+                float y = float.Parse(parameters[1]);
+                Point center = new Point(x, y);
                 
-                float Radius = float.Parse(parameters[2]);
+                float radius = float.Parse(parameters[2]);
 
-                if (Radius <= 0) {
+                if (radius <= 0) {
                     throw new InvalidOperationException("Радиус круга должен быть больше 0");
                 }
 
-                Circle circle = new Circle(Center, Radius);
+                Circle circle = new Circle(center, radius);
 
-                picture.Add(circle);
+                _picture.Add(circle);
             } catch (IndexOutOfRangeException) {
                 Console.WriteLine("Вы ввели не все параметры");
             } catch (FormatException) {

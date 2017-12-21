@@ -9,16 +9,15 @@ using System.Drawing;
 namespace GraphicsEditor {
     class Point : IShape {
 
-        public PointF Сoordinates { get;  private set; }
+        public PointF Сoordinates { get;}
 
-        public string Description { get; private set; }
+        public string Description { get;}
 
-        public FormatInfo Format { get; set; }
-        
-        public Point(float PointX, float PointY) {
-            Сoordinates = new PointF (PointX, PointY);
+        public FormatInfo Format { get; set; } = new FormatInfo();
+
+        public Point(float pointX, float pointY) {
+            Сoordinates = new PointF (pointX, pointY);
             Description = "Точка(" + Сoordinates.X + ", " + Сoordinates.Y + ")";
-            Format = new FormatInfo();
         }
 
         public void Draw (IDrawer drawer) {

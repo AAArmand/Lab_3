@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace GraphicsEditor {
     class Transformation {
-        public Matrix TransformMatrix { set; get; }
+        private Matrix TransformMatrix { get;}
 
         /// Возвращает преобразование поворота на угол angle вокруг точки (0,0)
         public static Transformation Rotate(float angle) {
@@ -36,8 +36,10 @@ namespace GraphicsEditor {
 
         /// Возвращает центральное аффинное преобразование, заданное матрицей 2x2
         public static Transformation FromMatrix(float[] matrix) {
-            Transformation transformation = new Transformation();
-            transformation.TransformMatrix = new Matrix(matrix[0], matrix[1], matrix[2], matrix[3], 0, 0);
+            Transformation transformation = new Transformation
+            {
+                TransformMatrix = new Matrix(matrix[0], matrix[1], matrix[2], matrix[3], 0, 0)
+            };
             return transformation;
         }
 
@@ -51,11 +53,7 @@ namespace GraphicsEditor {
         }
 
         /// Для любой точки плоскости возвращает её образ
-        public PointF this[PointF point] {
-            get {
-                return new PointF(Math.Abs(point.X), Math.Abs(point.Y));
-            }
-        }
+        public PointF this[PointF point] => new PointF(Math.Abs(point.X), Math.Abs(point.Y));
 
         private Transformation() {
             TransformMatrix = new Matrix();

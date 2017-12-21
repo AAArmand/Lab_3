@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace GraphicsEditor {
     class Line : IShape {
-        private Point Beginning { get; set; }
+        private Point Beginning { get;}
 
-        public string Description { get; private set; }
+        public string Description { get;}
 
-        private Point End{ get; set; }
+        private Point End { get; }
 
         public FormatInfo Format { get; set; }
 

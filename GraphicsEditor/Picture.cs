@@ -6,62 +6,66 @@ namespace GraphicsEditor
 {
     public class Picture : IDrawable
     {
-        private readonly List<IDrawable> shapes = new List<IDrawable>();
-        private readonly object lockObject = new object();
+        private readonly List<IDrawable> _shapes = new List<IDrawable>();
+        private readonly object _lockObject = new object();
         
-        public IEnumerable<IDrawable> Shapes { get { return shapes; } }
+        public IEnumerable<IDrawable> Shapes { get
+        {
+            lock (_lockObject)
+            {
+                return _shapes;
+            }
+        } }
 
         public event Action Changed;
 
         public void Remove(IDrawable shape)
         {
-            lock (lockObject)
+            lock (_lockObject)
             {              
-                shapes.Remove(shape);
+                _shapes.Remove(shape);
             }
         }
 
         public void RemoveAt(int index)
         {
-            lock (lockObject)
+            lock (_lockObject)
             {
-                shapes.RemoveAt(index);
-                if (Changed != null)
-                    Changed();
+                _shapes.RemoveAt(index);
+                Changed?.Invoke();
             }
         }
 
         public void Add(IDrawable shape)
         {
-            lock (lockObject)
+            lock (_lockObject)
             {
-                shapes.Add(shape);
-                if (Changed != null)
-                    Changed();
+                _shapes.Add(shape);
+                Changed?.Invoke();
             }
         }
 
         public void Add(int index, IDrawable shape)
         {
-            lock (lockObject)
+            lock (_lockObject)
             {
-                shapes.Insert(index, shape);
-                if (Changed != null)
-                    Changed();
+                _shapes.Insert(index, shape);
+                Changed?.Invoke();
             }
         }
 
         public void OnChanged() {
-            lock (lockObject) {
-                Changed();
+            lock (_lockObject)
+            {
+                Changed?.Invoke();
             }
         }
 
         public void Draw(IDrawer drawer)
         {
-            lock (lockObject)
+            lock (_lockObject)
             {
-                foreach (var shape in shapes)
+                foreach (var shape in _shapes)
                 {
                     shape.Draw(drawer);
                 }

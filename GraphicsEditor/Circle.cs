@@ -17,17 +17,17 @@ namespace GraphicsEditor {
 
         public FormatInfo Format { get; set; }
 
-        public Circle(Point Center, float R) {
-            DotOfCenter = Center;
-            Diametr = 2 * R;
-            Description = "Круг(" + Center.Description + ", " + "Радиус = " + R + ")";
+        public Circle(Point center, float r) {
+            DotOfCenter = center;
+            Diametr = 2 * r;
+            Description = "Круг(" + center.Description + ", " + "Радиус = " + r + ")";
             Format = new FormatInfo();
         }
 
         public void Draw(IDrawer drawer) {
             drawer.SelectPen(Format.Color, Format.Width);
-            SizeF Sizes = new SizeF(Diametr, Diametr);
-            drawer.DrawEllipseArc(DotOfCenter.Сoordinates, Sizes, 0, 360, 0);
+            SizeF sizes = new SizeF(Diametr, Diametr);
+            drawer.DrawEllipseArc(DotOfCenter.Сoordinates, sizes, 0, 360, 0);
         }
 
         public void Transform(Transformation trans) {   }
