@@ -30,11 +30,22 @@ namespace GraphicsEditor {
                 if (picture.Shapes.Count() == 0) {
                    throw new NullReferenceException("Не нарисовано ни одной фигуры");
                 }
-                
 
+                IEnumerable<DescriptionData> shapes =  picture.Shapes.Where(shape => {
+                    Type[] type = shape.GetType().Assembly.GetTypes();
+                    if (type.Contains(typeof(DescriptionData))) {
+                        return true;
+                    }
+                    return false;
+                }).Cast<DescriptionData>();
+                
                 int i = 0;
-                foreach (IShape shape in picture.Shapes ) {
-                    Console.WriteLine("[{0}] {1}", i, shape.Description);
+                foreach (DescriptionData shape in shapes ) {
+                    
+                    //Type[] j = shape.GetType().GetInterfaces();
+                    //if (j.Contains(typeof(IDescription))) {
+                        Console.WriteLine("[{0}] {1}", i, shape.Description);
+                    //}
                     i++;
                 }
                

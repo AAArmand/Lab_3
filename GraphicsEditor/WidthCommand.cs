@@ -13,9 +13,7 @@ namespace GraphicsEditor {
         public string Description { get { return "Изменяет ширину линий фигуры. Первый параметр - ширина, последующие - индексы фигур"; } }
         public string[] Synonyms { get { return new string[] { "breadth", "w" }; } }
 
-        public WidthCommand(Picture picture) : base(picture) {
-            this.picture = picture;
-        }
+        public WidthCommand(Picture picture) : base(picture) {}
         public void Execute(params string[] parameters) {
             try {
 
