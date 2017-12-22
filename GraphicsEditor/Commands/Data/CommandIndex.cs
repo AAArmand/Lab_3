@@ -19,7 +19,7 @@ namespace GraphicsEditor.Commands.Data {
                         throw new ArgumentException("Индекс " + index + " не может быть отрицательным");
                     }
 
-                    if (index > Picture.ShapesIndexes.Last())
+                    if (index >= Picture.Figures.Count)
                     {
                         throw new ArgumentException("Не существует фигуры с индексом " + index);
                     }
@@ -28,10 +28,8 @@ namespace GraphicsEditor.Commands.Data {
                     {
                         throw new ArgumentException("Индекс " + index + " повторяется");
                     }
-                    else
-                    {
-                        indexes.Add(index);
-                    }
+
+                    indexes.Add(index);
                 }
 
                 return indexes.ToArray();

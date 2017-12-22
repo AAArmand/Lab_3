@@ -2,7 +2,7 @@
 using ConsoleUI;
 using GraphicsEditor.Commands.Data;
 
-namespace GraphicsEditor.Commands.FiguresDataCommands {
+namespace GraphicsEditor.Commands.ShapesDataCommands {
     class RemoveCommand : CommandIndex, ICommand {
         public string Name => "remove"; public string Help => "Удаляет фигуры с картинки";
         public string GetDescription() { return "Удаляет фигуры с картинки. Параметры команды — индексы элементов, которые нужно удалить с картинки"; }
@@ -16,14 +16,14 @@ namespace GraphicsEditor.Commands.FiguresDataCommands {
             }
         }
 
-        private void DeleteShape(int[] indexes) {
-            for (int i = 0; i < indexes.Length; i++) {
-                Picture.RemoveAt(indexes[i]);
-                DecrimentArray(ref indexes);
+        public void DeleteShape(int[] indexes) {
+            int dec = 0;
+            foreach (int index in indexes) {
+               Picture.RemoveAt(index - dec);
+                dec++;
             }
         }
-
-        
+       
         public void Execute(params string[] parameters) {
             try {
                 int[] deleteIndexes = ValidateIndexes(parameters);
@@ -37,6 +37,7 @@ namespace GraphicsEditor.Commands.FiguresDataCommands {
                 Console.WriteLine(error.Message);
             }
         }
+
     }
 }
  

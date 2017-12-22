@@ -19,14 +19,11 @@ namespace GraphicsEditor.Commands.ShapesDataCommands {
                 int[] indexes = ValidateIndexes(parameters);
 
                 if (indexes != null) {
-                    int i = 0;
-                    foreach (IShape shape in Picture.Shapes) {
-                        if (indexes.Contains(i)) {
-                            shape.Format.Width = uint.Parse(parameters[0]);
+                    foreach (int index in indexes) {
+                        if (Picture.Figures[index] != null) {
+                            Picture.Figures[index].Format.Width = uint.Parse(parameters[0]);                          
                         }
-                        i++;
-                    }
-
+                    }               
                     Picture.OnChanged();
                 } else {
                     throw new ArgumentException("Повторите ввод индексов фигур");

@@ -15,12 +15,13 @@ namespace GraphicsEditor.Commands.FiguresInitCommands {
         public GroupCommand(Picture picture) : base(picture) { }
     
         public void Execute(params string[] parameters) {
+            
             try {
                 if (parameters[0] == "") {
                     throw new FormatException("Команда должна принимать параметры");
                 }
 
-                if (!Picture.Shapes.Any()) {
+                if (!Picture.Figures.Any()) {
                     throw new NullReferenceException("Не нарисовано ни одной фигуры");
                 }
 

@@ -12,33 +12,12 @@ namespace GraphicsEditor
         private readonly List<IDrawable> _drawables = new List<IDrawable>();
         private readonly object _lockObject = new object();
 
-        public IEnumerable<IShape> Shapes
-        {
+        public IReadOnlyList<IFigure> Figures {
             get
             {
                 lock (_lockObject)
                 {
-                    IEnumerable<IShape> shapes = _drawables?.Where(shape =>
-                    {
-                        Type[] type = shape.GetType().GetInterfaces();
-                        if (type.Contains(typeof(IShape)))
-                        {
-                            return true;
-                        }
-                        return false;
-                    }).Cast<IShape>();
-
-                    return shapes;
-                }
-            }
-        }
-
-        public IEnumerable<IFigure> Figures {
-            get
-            {
-                lock (_lockObject)
-                {
-                    IEnumerable<IFigure> figures = _drawables?.Where(shape =>
+                    IReadOnlyList<IFigure> figures = _drawables?.Where(shape =>
                     {
                         Type[] type = shape.GetType().GetInterfaces();
                         if (type.Contains(typeof(IFigure)))
@@ -46,17 +25,9 @@ namespace GraphicsEditor
                             return true;
                         }
                         return false;
-                    }).Cast<IFigure>();
+                    }).Cast<IFigure>().ToList();
 
                     return figures;
-                }
-            }
-        }
-
-        public IEnumerable<int> ShapesIndexes {
-            get {
-                lock (_lockObject) {                        
-                    return Enumerable.Range(0, _drawables.Count);
                 }
             }
         }
@@ -75,8 +46,16 @@ namespace GraphicsEditor
         {
             lock (_lockObject)
             {
-                _drawables.RemoveAt(index);
-                Changed?.Invoke();
+                try
+                {
+                    _drawables.RemoveAt(index);
+                    Changed?.Invoke();
+                }
+                catch (ArgumentOutOfRangeException e)
+                {                   
+                    Console.WriteLine(e.Message);
+                }
+                
             }
         }
 

@@ -5,7 +5,7 @@ using ConsoleUI;
 using GraphicsEditor.Commands.Data;
 using GraphicsEditor.Figures.Data.Interfaces;
 
-namespace GraphicsEditor.Commands.ShapesDataCommands {
+namespace GraphicsEditor.Commands.FiguresDataCommands {
     class ColorCommand : CommandIndex, ICommand {
         public string Name => "color"; public string Help => "Изменяет цвет линий фигуры на заданный";
         public string GetDescription() { return "Изменяет цвет линий фигуры. Первый параметр - название цвета, последующие - индексы фигур"; }
@@ -19,13 +19,11 @@ namespace GraphicsEditor.Commands.ShapesDataCommands {
                 int[] indexes = ValidateIndexes(parameters);
 
                 if (indexes!= null) {
-                    int i = 0;
-                    foreach (IFigure figure in Picture.Figures) {
-                        if (indexes.Contains(i)) {
-                            figure.Format.Color = ColorTranslator.FromHtml(parameters[0]);
+                    foreach (int index in indexes) {
+                        if (Picture.Figures[index] != null) {
+                            Picture.Figures[index].Format.Color = ColorTranslator.FromHtml(parameters[0]);                          ;
                         }
-                        i++;
-                    }
+                    }                
                     Picture.OnChanged();
                 } else {
                     throw new ArgumentException("Повторите ввод индексов фигур");

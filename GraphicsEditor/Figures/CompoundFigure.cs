@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using DrawablesUI;
+using GraphicsEditor.Commands.ShapesDataCommands;
 using GraphicsEditor.Figures.Data;
 using GraphicsEditor.Figures.Data.Interfaces;
 
@@ -11,28 +12,19 @@ namespace GraphicsEditor.Figures {
         public List<IFigure> Figures { get; } = new List<IFigure>();
 
         public CompoundFigure(Picture picture, int[] indexes) {
-            int i = 0;
-            foreach (IFigure figure in picture.Figures) {
-                if (indexes.Contains(i)) {
-                    Figures.Add(figure);
+            foreach (int index in indexes) {           
+                if (picture.Figures[index] != null) {
+                    Figures.Add(picture.Figures[index]);
                 }
-                i++;
             }
-
-            DeleteShape(picture, indexes);
+            Array.Sort(indexes);
+            RemoveCommand remove = new RemoveCommand(picture);
+            remove.DeleteShape(indexes);
             Description.DescriptionText = "Составная фигура";
         }
 
 
-        private void DeleteShape(Picture picture, int[] indexes)
-        {
-            int dec = 0;
-            foreach (int index in indexes)
-            {
-                picture.RemoveAt(index - dec);
-                dec++;
-            }
-        }
+
 
         public override void Transform(Transformation trans)
         {

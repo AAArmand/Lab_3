@@ -5,6 +5,6 @@ namespace GraphicsEditor.Figures.Data.Interfaces {
     {
         FormatInfo Format { get; set; }
   
-        void Transform(GraphicsEditor.Transformation trans);
+        void Transform(Transformation trans);
     }
 }

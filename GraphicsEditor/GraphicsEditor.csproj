@@ -45,7 +45,7 @@
   <ItemGroup>
     <Compile Include="Figures\CircleFigure.cs" />
     <Compile Include="Commands\FiguresInitCommands\CircleCommand.cs" />
-    <Compile Include="Commands\ShapesDataCommands\ColorCommand.cs" />
+    <Compile Include="Commands\FiguresDataCommands\ColorCommand.cs" />
     <Compile Include="Commands\Data\CommandIndex.cs" />
     <Compile Include="Figures\CompoundFigure.cs" />
     <Compile Include="Figures\Data\Description.cs" />
@@ -58,15 +58,15 @@
     <Compile Include="Figures\Data\Interfaces\IShape.cs" />
     <Compile Include="Figures\LineFigure.cs" />
     <Compile Include="Commands\FiguresInitCommands\LineCommand.cs" />
-    <Compile Include="Commands\ShapesDataCommands\FiguresDataCommands\ListCommand.cs" />
+    <Compile Include="Commands\FiguresDataCommands\ListCommand.cs" />
     <Compile Include="Picture.cs" />
     <Compile Include="Figures\PointFigure.cs" />
     <Compile Include="Commands\FiguresInitCommands\PointCommand.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Commands\ShapesDataCommands\RemoveCommand.cs" />
+    <Compile Include="Commands\FiguresDataCommands\RemoveCommand.cs" />
     <Compile Include="Figures\Data\Transformation.cs" />
-    <Compile Include="Commands\ShapesDataCommands\WidthCommand.cs" />
+    <Compile Include="Commands\FiguresDataCommands\WidthCommand.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

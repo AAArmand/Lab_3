@@ -19,15 +19,13 @@ namespace GraphicsEditor.Commands.ShapesDataCommands.FiguresDataCommands {
                     throw new FormatException("Команда не принимает параметров");
                 }
                 
-                if (!_picture.Shapes.Any()) {
+                if (!_picture.Figures.Any()) {
                    throw new NullReferenceException("Не нарисовано ни одной фигуры");
                 }
                 
 
-                int i = 0;
-                foreach (IFigure figure in _picture.Figures) {
-                    Console.WriteLine(figure.GenerateDescription(i));
-                    i++;
+                for(int index = 0 ; index < _picture.Figures.Count; index++) {
+                    Console.WriteLine(_picture.Figures[index].GenerateDescription(index));
                 }
                
             } catch (FormatException error) {
