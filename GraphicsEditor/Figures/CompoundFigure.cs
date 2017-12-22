@@ -50,8 +50,7 @@ namespace GraphicsEditor.Figures {
 
 
         public override string GenerateDescription(int[] indexes) {
-            List<string> description = new List<string>();
-            
+            List<string> description = new List<string> {base.GenerateDescription(indexes)};
             Array.Resize(ref indexes, indexes.Length + 1);
             int lastElement = indexes.Length - 1;
             indexes[lastElement] = 0;
@@ -64,7 +63,7 @@ namespace GraphicsEditor.Figures {
             return String.Join("\n", description);
         }
 
-        public override string GenerateDescription(int index) {
+        public override string GenerateDescription(int index) {       
             return GenerateDescription(new[]{ index });          
         }
 
