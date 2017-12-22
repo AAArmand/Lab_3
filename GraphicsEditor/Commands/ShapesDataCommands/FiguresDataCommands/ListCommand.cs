@@ -1,14 +1,9 @@
-﻿using ConsoleUI;
-using DrawablesUI;
-using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+using ConsoleUI;
+using GraphicsEditor.Figures.Data.Interfaces;
 
-namespace GraphicsEditor {
+namespace GraphicsEditor.Commands.ShapesDataCommands.FiguresDataCommands {
     class ListCommand : ICommand{
         private readonly Picture _picture;
 
@@ -16,9 +11,7 @@ namespace GraphicsEditor {
         public string GetDescription() { return "Выводит список фигур на картинке, не принимает параметров"; }
 
         public string[] Synonyms => new string[] { "bill", "roll" };
-        public ListCommand(Picture picture) {
-            this._picture = picture;
-        }
+        public ListCommand(Picture picture) => this._picture = picture;
 
         public void Execute(params string[] parameters) {
             try {
@@ -32,8 +25,8 @@ namespace GraphicsEditor {
                 
 
                 int i = 0;
-                foreach (IShape shape in _picture.Shapes ) {
-                    Console.WriteLine("[{0}] {1}", i, shape.Description);
+                foreach (IFigure figure in _picture.Figures) {
+                    Console.WriteLine(figure.GenerateDescription(i));
                     i++;
                 }
                

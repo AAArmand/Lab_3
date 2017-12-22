@@ -1,18 +1,16 @@
-﻿using ConsoleUI;
+﻿using System;
 using System.Drawing;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DrawablesUI;
+using ConsoleUI;
+using GraphicsEditor.Commands.Data;
+using GraphicsEditor.Figures.Data.Interfaces;
 
-namespace GraphicsEditor {
-    class ColorCommand :CommandIndex, ICommand {
+namespace GraphicsEditor.Commands.ShapesDataCommands {
+    class ColorCommand : CommandIndex, ICommand {
         public string Name => "color"; public string Help => "Изменяет цвет линий фигуры на заданный";
         public string GetDescription() { return "Изменяет цвет линий фигуры. Первый параметр - название цвета, последующие - индексы фигур"; }
 
-        public string[] Synonyms => new string[] { "coloring", "colouring" };
+        public string[] Synonyms => new[] { "coloring", "colouring" };
         public ColorCommand(Picture picture) :base(picture) { }
 
 
@@ -22,9 +20,9 @@ namespace GraphicsEditor {
 
                 if (indexes!= null) {
                     int i = 0;
-                    foreach (IShape shape in Picture.Shapes) {
+                    foreach (IFigure figure in Picture.Figures) {
                         if (indexes.Contains(i)) {
-                            shape.Format.Color = ColorTranslator.FromHtml(parameters[0]);
+                            figure.Format.Color = ColorTranslator.FromHtml(parameters[0]);
                         }
                         i++;
                     }

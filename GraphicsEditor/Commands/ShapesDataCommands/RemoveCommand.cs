@@ -1,12 +1,9 @@
-﻿using ConsoleUI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
+using ConsoleUI;
+using GraphicsEditor.Commands.Data;
 
-namespace GraphicsEditor {
-    class RemoveCommand :CommandIndex, ICommand {
+namespace GraphicsEditor.Commands.FiguresDataCommands {
+    class RemoveCommand : CommandIndex, ICommand {
         public string Name => "remove"; public string Help => "Удаляет фигуры с картинки";
         public string GetDescription() { return "Удаляет фигуры с картинки. Параметры команды — индексы элементов, которые нужно удалить с картинки"; }
 

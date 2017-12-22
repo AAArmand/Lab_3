@@ -1,11 +1,8 @@
-﻿using ConsoleUI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
+using ConsoleUI;
+using GraphicsEditor.Figures;
 
-namespace GraphicsEditor {
+namespace GraphicsEditor.Commands.FiguresInitCommands {
     class CircleCommand : ICommand {
         private readonly Picture _picture;
 
@@ -23,7 +20,7 @@ namespace GraphicsEditor {
 
                 float x = float.Parse(parameters[0]);
                 float y = float.Parse(parameters[1]);
-                Point center = new Point(x, y);
+                PointFigure center = new PointFigure(x, y);
                 
                 float radius = float.Parse(parameters[2]);
 
@@ -31,7 +28,7 @@ namespace GraphicsEditor {
                     throw new InvalidOperationException("Радиус круга должен быть больше 0");
                 }
 
-                Circle circle = new Circle(center, radius);
+                CircleFigure circle = new CircleFigure(center, radius);
 
                 _picture.Add(circle);
             } catch (IndexOutOfRangeException) {

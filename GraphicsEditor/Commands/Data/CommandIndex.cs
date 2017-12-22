@@ -1,16 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace GraphicsEditor {
+namespace GraphicsEditor.Commands.Data {
     abstract class CommandIndex {
-
-        protected Picture Picture;
-
-        protected CommandIndex(Picture picture) => this.Picture = picture ?? throw new ArgumentNullException(nameof(picture));
-
+        protected readonly Picture Picture;
+        protected CommandIndex(Picture picture) => Picture = picture ?? throw new ArgumentNullException(nameof(picture));
         protected int[] ValidateIndexes(string[] parameters) {
             try {
                 List<int> indexes = new List<int>();
@@ -24,7 +19,7 @@ namespace GraphicsEditor {
                         throw new ArgumentException("Индекс " + index + " не может быть отрицательным");
                     }
 
-                    if (index >= Picture.Shapes.Count())
+                    if (index > Picture.ShapesIndexes.Last())
                     {
                         throw new ArgumentException("Не существует фигуры с индексом " + index);
                     }

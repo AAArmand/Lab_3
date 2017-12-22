@@ -1,7 +1,13 @@
 ﻿using System;
+using System.Net.Mime;
 using ConsoleUI;
 using DrawablesUI;
 using System.Text;
+using GraphicsEditor.Commands;
+using GraphicsEditor.Commands.FiguresDataCommands;
+using GraphicsEditor.Commands.FiguresInitCommands;
+using GraphicsEditor.Commands.ShapesDataCommands;
+using GraphicsEditor.Commands.ShapesDataCommands.FiguresDataCommands;
 
 namespace GraphicsEditor
 {
@@ -25,6 +31,7 @@ namespace GraphicsEditor
             app.AddCommand(new RemoveCommand(picture));
             app.AddCommand(new ColorCommand(picture));
             app.AddCommand(new WidthCommand(picture));
+            app.AddCommand(new GroupCommand(picture));
 
             picture.Changed += ui.Refresh;
             ui.Start();

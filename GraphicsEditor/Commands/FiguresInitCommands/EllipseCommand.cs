@@ -1,11 +1,8 @@
-﻿using ConsoleUI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
+using ConsoleUI;
+using GraphicsEditor.Figures;
 
-namespace GraphicsEditor {
+namespace GraphicsEditor.Commands.FiguresInitCommands {
     class EllipseCommand : ICommand{
         private readonly Picture _picture;
 
@@ -23,7 +20,7 @@ namespace GraphicsEditor {
 
                 float x = float.Parse(parameters[0]);
                 float y = float.Parse(parameters[1]);
-                Point center = new Point(x, y);
+                PointFigure center = new PointFigure(x, y);
 
                 float height = float.Parse(parameters[2]);
                 float width = float.Parse(parameters[3]);
@@ -33,7 +30,7 @@ namespace GraphicsEditor {
                 }
 
                 float angle = float.Parse(parameters[4]);
-                Ellipse ellipse = new Ellipse(center, width, height, angle);
+                EllipseFigure ellipse = new EllipseFigure(center, width, height, angle);
 
                 _picture.Add(ellipse);
             } catch (IndexOutOfRangeException) {

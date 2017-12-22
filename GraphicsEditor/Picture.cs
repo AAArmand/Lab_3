@@ -1,29 +1,73 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using DrawablesUI;
+using GraphicsEditor.Figures.Data.Interfaces;
 
 namespace GraphicsEditor
 {
-    public class Picture : IDrawable
+    class Picture : IDrawable
     {
-        private readonly List<IDrawable> _shapes = new List<IDrawable>();
+        private readonly List<IDrawable> _drawables = new List<IDrawable>();
         private readonly object _lockObject = new object();
-        
-        public IEnumerable<IDrawable> Shapes { get
+
+        public IEnumerable<IShape> Shapes
         {
-            lock (_lockObject)
+            get
             {
-                return _shapes;
+                lock (_lockObject)
+                {
+                    IEnumerable<IShape> shapes = _drawables?.Where(shape =>
+                    {
+                        Type[] type = shape.GetType().GetInterfaces();
+                        if (type.Contains(typeof(IShape)))
+                        {
+                            return true;
+                        }
+                        return false;
+                    }).Cast<IShape>();
+
+                    return shapes;
+                }
             }
-        } }
+        }
+
+        public IEnumerable<IFigure> Figures {
+            get
+            {
+                lock (_lockObject)
+                {
+                    IEnumerable<IFigure> figures = _drawables?.Where(shape =>
+                    {
+                        Type[] type = shape.GetType().GetInterfaces();
+                        if (type.Contains(typeof(IFigure)))
+                        {
+                            return true;
+                        }
+                        return false;
+                    }).Cast<IFigure>();
+
+                    return figures;
+                }
+            }
+        }
+
+        public IEnumerable<int> ShapesIndexes {
+            get {
+                lock (_lockObject) {                        
+                    return Enumerable.Range(0, _drawables.Count);
+                }
+            }
+        }
 
         public event Action Changed;
 
         public void Remove(IDrawable shape)
         {
             lock (_lockObject)
-            {              
-                _shapes.Remove(shape);
+            {
+                _drawables.Remove(shape);
             }
         }
 
@@ -31,7 +75,7 @@ namespace GraphicsEditor
         {
             lock (_lockObject)
             {
-                _shapes.RemoveAt(index);
+                _drawables.RemoveAt(index);
                 Changed?.Invoke();
             }
         }
@@ -40,7 +84,7 @@ namespace GraphicsEditor
         {
             lock (_lockObject)
             {
-                _shapes.Add(shape);
+                _drawables.Add(shape);
                 Changed?.Invoke();
             }
         }
@@ -49,7 +93,7 @@ namespace GraphicsEditor
         {
             lock (_lockObject)
             {
-                _shapes.Insert(index, shape);
+                _drawables.Insert(index, shape);
                 Changed?.Invoke();
             }
         }
@@ -65,7 +109,7 @@ namespace GraphicsEditor
         {
             lock (_lockObject)
             {
-                foreach (var shape in _shapes)
+                foreach (var shape in _drawables)
                 {
                     shape.Draw(drawer);
                 }

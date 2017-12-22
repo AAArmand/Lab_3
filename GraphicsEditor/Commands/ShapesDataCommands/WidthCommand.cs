@@ -1,11 +1,10 @@
-﻿using ConsoleUI;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using ConsoleUI;
+using GraphicsEditor.Commands.Data;
+using GraphicsEditor.Figures.Data.Interfaces;
 
-namespace GraphicsEditor {
+namespace GraphicsEditor.Commands.ShapesDataCommands {
     class WidthCommand : CommandIndex, ICommand {
         public string Name => "width"; public string Help => "Изменяет ширину линий фигуры на заданный";
         public string GetDescription() { return "Изменяет ширину линий фигуры. Первый параметр - ширина, последующие - индексы фигур"; }

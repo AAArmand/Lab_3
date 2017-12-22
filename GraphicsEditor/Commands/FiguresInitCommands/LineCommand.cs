@@ -1,11 +1,8 @@
-﻿using ConsoleUI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
+using ConsoleUI;
+using GraphicsEditor.Figures;
 
-namespace GraphicsEditor {
+namespace GraphicsEditor.Commands.FiguresInitCommands {
     class LineCommand : ICommand{
 
         private readonly Picture _picture;
@@ -25,7 +22,7 @@ namespace GraphicsEditor {
                 float[] x = { float.Parse(parameters[0]), float.Parse(parameters[2]) };
                 float[] y = { float.Parse(parameters[1]), float.Parse(parameters[3]) };
 
-                Line line = new Line(new Point(x[0], y[0]), new Point(x[1], y[1]));
+                LineFigure line = new LineFigure(new PointFigure(x[0], y[0]), new PointFigure(x[1], y[1]));
                 _picture.Add(line);
             } catch (IndexOutOfRangeException) {
                 Console.WriteLine("Вы ввели не все координаты");

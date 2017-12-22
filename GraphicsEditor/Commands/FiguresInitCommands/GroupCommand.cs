@@ -1,11 +1,10 @@
-﻿using ConsoleUI;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using ConsoleUI;
+using GraphicsEditor.Commands.Data;
+using GraphicsEditor.Figures;
 
-namespace GraphicsEditor {
+namespace GraphicsEditor.Commands.FiguresInitCommands {
     class GroupCommand : CommandIndex, ICommand {
 
         public string Name => "group"; public string Help => "Группировка фигур";
@@ -27,8 +26,7 @@ namespace GraphicsEditor {
 
                 int[] indexes = ValidateIndexes(parameters);           
                 if (indexes != null) {
-                    CompoundShape compoundShape = new CompoundShape(Picture, indexes);
-                    Picture.Add(compoundShape);
+                    Picture.Add(new CompoundFigure(Picture, indexes));
                 } else {
                     throw new ArgumentException("Введите индексы заново");
                 }

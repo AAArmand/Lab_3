@@ -1,13 +1,9 @@
-﻿using ConsoleUI;
-using DrawablesUI;
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
+using ConsoleUI;
+using GraphicsEditor.Figures;
+using Point = GraphicsEditor.Figures.PointFigure;
 
-namespace GraphicsEditor {
+namespace GraphicsEditor.Commands.FiguresInitCommands {
     class PointCommand : ICommand {
 
         private readonly Picture _picture;
@@ -28,7 +24,7 @@ namespace GraphicsEditor {
                 float x = float.Parse(parameters[0]);
                 float y = float.Parse(parameters[1]);
 
-                Point point = new Point(x, y);
+                PointFigure point = new PointFigure(x, y);
                 _picture.Add(point);
             } catch (IndexOutOfRangeException){
                 Console.WriteLine("Вы ввели не все координаты");
