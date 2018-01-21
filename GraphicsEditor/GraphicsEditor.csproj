@@ -43,10 +43,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< Updated upstream
     <Compile Include="Commands\FiguresInitCommands\UngroupCommand.cs" />
     <Compile Include="Commands\ShapesDataCommands\RotateCommand.cs" />
     <Compile Include="Commands\ShapesDataCommands\ScaleCommand.cs" />
     <Compile Include="Commands\ShapesDataCommands\TranslateCommand.cs" />
+=======
+    <Compile Include="Commands\Data\IndexesComparer.cs" />
+    <Compile Include="Commands\Data\ShapeHelper.cs" />
+    <Compile Include="Commands\Data\ValidationHelper.cs" />
+    <Compile Include="Commands\FiguresDataCommands\RotateCommand.cs" />
+    <Compile Include="Commands\FiguresDataCommands\ScaleCommand.cs" />
+    <Compile Include="Commands\FiguresDataCommands\TranslateCommand.cs" />
+>>>>>>> Stashed changes
     <Compile Include="Figures\CircleFigure.cs" />
     <Compile Include="Commands\FiguresInitCommands\CircleCommand.cs" />
     <Compile Include="Commands\ShapesDataCommands\ColorCommand.cs" />

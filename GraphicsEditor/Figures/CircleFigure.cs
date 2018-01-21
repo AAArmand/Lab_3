@@ -20,9 +20,16 @@ namespace GraphicsEditor.Figures {
             drawer.DrawEllipseArc(DotOfCenter.Сoordinates, sizes, 0, 360, 0);
         }
 
+<<<<<<< Updated upstream
         public override void Transform(Transformation trans) {
             DotOfCenter.Сoordinates = new PointF(trans.TransformMatrix.OffsetX, trans.TransformMatrix.OffsetY);
             if (trans.TransformMatrix.Elements[0] != 0) {
+=======
+        public void Transform(Transformation trans) {
+            DotOfCenter.Сoordinates = new PointF(trans.TransformMatrix.OffsetX, trans.TransformMatrix.OffsetY);
+            if (trans.TransformMatrix.Elements[0] != 0)
+            {
+>>>>>>> Stashed changes
                 Diametr = trans.TransformMatrix.Elements[0];
             }
         }

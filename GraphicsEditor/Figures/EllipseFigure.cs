@@ -31,7 +31,12 @@ namespace GraphicsEditor.Figures {
         public override void Transform(Transformation trans) {
             DotOfCenter.Сoordinates = new PointF(trans.TransformMatrix.OffsetX, trans.TransformMatrix.OffsetY);
             Rotate = Math.Asin(trans.TransformMatrix.Elements[1]) * 180 / Math.PI;
+<<<<<<< Updated upstream
             if (trans.TransformMatrix.Elements[0] != 0) {
+=======
+            if (trans.TransformMatrix.Elements[0] != 0)
+            {
+>>>>>>> Stashed changes
                 Sizes = new SizeF(trans.TransformMatrix.Elements[0], trans.TransformMatrix.Elements[3]);
             }
         }
