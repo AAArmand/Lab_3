@@ -4,10 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleUI
-{
-    public class ExitCommand : ICommand
-    {
+namespace ConsoleUI {
+    public class ExitCommand : ICommand {
         private readonly Application _app;
 
         public string Name => "exit"; public string Help => "Выход из программы";
@@ -18,8 +16,7 @@ namespace ConsoleUI
             this._app = app;
         }
 
-        public void Execute(params string[] parameters)
-        {
+        public void Execute(params string[] parameters) {
             _app.Exit();
         }
     }

@@ -52,7 +52,7 @@ namespace GraphicsEditor.Commands.FiguresDataCommands
                         }
                         i++;
                     }
-                    //
+
                     Picture.OnChanged();
                 }
                 else

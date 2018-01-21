@@ -1,18 +1,21 @@
 ﻿using System;
-using System.Net.Mime;
 using ConsoleUI;
 using DrawablesUI;
 using System.Text;
-using GraphicsEditor.Commands;
 using GraphicsEditor.Commands.FiguresDataCommands;
 using GraphicsEditor.Commands.FiguresInitCommands;
-using GraphicsEditor.Commands.ShapesDataCommands;
-using GraphicsEditor.Commands.ShapesDataCommands.FiguresDataCommands;
+using GraphicsEditor.Figures;
+using GraphicsEditor.Figures.Data.Interfaces;
 
 namespace GraphicsEditor
 {
     class Program
     {
+        private static Picture _instance;
+        public static Picture GetInstance()
+        {
+            return _instance ?? (_instance = new Picture());
+        }
         static void Main(string[] args)
         {
             Console.OutputEncoding = Encoding.UTF8;
@@ -27,14 +30,12 @@ namespace GraphicsEditor
             app.AddCommand(new LineCommand(picture));
             app.AddCommand(new EllipseCommand(picture));
             app.AddCommand(new CircleCommand(picture));
-            app.AddCommand(new ListCommand(picture));
-            app.AddCommand(new RemoveCommand(picture));
-            app.AddCommand(new ColorCommand(picture));
-            app.AddCommand(new WidthCommand(picture));
-            app.AddCommand(new GroupCommand(picture));
-            app.AddCommand(new TranslateCommand(picture));
-            app.AddCommand(new RotateCommand(picture));
-            app.AddCommand(new ScaleCommand(picture));
+            app.AddCommand(new ListCommand<IFigure>(picture));
+            app.AddCommand(new RemoveCommand<IFigure>(picture));
+            app.AddCommand(new ColorCommand<IFigure>(picture));
+            app.AddCommand(new WidthCommand<IFigure>(picture));
+            app.AddCommand(new GroupFigureCommand(picture));
+            app.AddCommand(new UngroupCommand<IFigure>(picture));
 
             picture.Changed += ui.Refresh;
             ui.Start();

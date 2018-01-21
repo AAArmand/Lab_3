@@ -1,17 +1,19 @@
 ﻿using System;
 using ConsoleUI;
+using DrawablesUI;
 using GraphicsEditor.Figures;
+using GraphicsEditor.Figures.Data.Interfaces;
 
 namespace GraphicsEditor.Commands.FiguresInitCommands {
     class LineCommand : ICommand{
 
-        private readonly Picture _picture;
+        private readonly IContainer<IDrawable> _picture;
 
         public string Name => "line"; public string Help => "Рисует отрезок в графическом интерфейсе";
         public string GetDescription() { return "Рисует отрезок от одной точки до другой, в качестве параметра - две пары координат точек"; }
 
         public string[] Synonyms => new string[] { "segment", "offcut" };
-        public LineCommand(Picture picture) => _picture = picture ?? throw new ArgumentNullException(nameof(picture));
+        public LineCommand(IContainer<IDrawable> picture) => _picture = picture;
 
         public void Execute(params string[] parameters) {
             try {

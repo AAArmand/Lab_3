@@ -11,10 +11,14 @@ namespace GraphicsEditor.Figures.Data {
             Width = width;
         }
 
-        public FormatInfo(Color color) => Color = color;
+        public FormatInfo(Color color) {
+            Color = color;
+        }
 
-        public FormatInfo(uint width) => Width = width;
-
+        public FormatInfo(uint width) {
+            Width = width;
+        }
+        
         public FormatInfo() { }
     }
 }

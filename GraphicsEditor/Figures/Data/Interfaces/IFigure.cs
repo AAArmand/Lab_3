@@ -1,12 +1,14 @@
-﻿namespace GraphicsEditor.Figures.Data.Interfaces
+﻿using DrawablesUI;
+
+namespace GraphicsEditor.Figures.Data.Interfaces
 {
-    interface IFigure : IShape
+    interface  IFigure : IShape
     {
-        Description Description { get; }
+        string Description { get; }
 
-        string GenerateDescription(int index);
+        string GenerateDescription(uint index);
 
-        string GenerateDescription(int[] indexes);
+        string GenerateDescription(uint[] indexes);
 
     }
 }

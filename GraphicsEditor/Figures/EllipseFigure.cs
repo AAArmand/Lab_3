@@ -5,8 +5,8 @@ using GraphicsEditor.Figures.Data;
 using GraphicsEditor.Figures.Data.Interfaces;
 
 namespace GraphicsEditor.Figures {
-    class EllipseFigure : Figure {
-        private PointFigure DotOfCenter { get; set; }
+    class EllipseFigure : FigureDescribtion, IFigure {
+        private PointFigure DotOfCenter { get;}
 
         private SizeF Sizes { get; set; }
 
@@ -16,27 +16,23 @@ namespace GraphicsEditor.Figures {
             DotOfCenter = center;
             Sizes = new SizeF(width, height);
             Rotate = angle;
-            Description.DescriptionText = "Эллипс(" + center.Description.DescriptionText + ", " + "Ось a = " + height + ", " + "Ocь b = " + width + ", " + "Угол поворота = " + angle + ")";
+            Description = "Эллипс(" + center.Description + ", " + "Ось a = " + height + ", " + "Ocь b = " + width + ", " + "Угол поворота = " + angle + ")";
         }
 
-        public override void Draw(IDrawer drawer)
+        public void Draw(IDrawer drawer)
         {
             if (drawer == null) throw new ArgumentNullException(nameof(drawer)); 
             
             drawer.SelectPen(Format.Color, Format.Width);
-            drawer.DrawEllipseArc(DotOfCenter.Сoordinates, Sizes, 0, 360, (float)Rotate);
+            drawer.DrawEllipseArc(DotOfCenter.Сoordinates, Sizes, 0, 360, Rotate);
             
         }
 
-        public override void Transform(Transformation trans) {
+        public void Transform(Transformation trans) {
             DotOfCenter.Сoordinates = new PointF(trans.TransformMatrix.OffsetX, trans.TransformMatrix.OffsetY);
             Rotate = Math.Asin(trans.TransformMatrix.Elements[1]) * 180 / Math.PI;
-<<<<<<< Updated upstream
-            if (trans.TransformMatrix.Elements[0] != 0) {
-=======
             if (trans.TransformMatrix.Elements[0] != 0)
             {
->>>>>>> Stashed changes
                 Sizes = new SizeF(trans.TransformMatrix.Elements[0], trans.TransformMatrix.Elements[3]);
             }
         }

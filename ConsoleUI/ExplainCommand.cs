@@ -8,21 +8,31 @@ namespace ConsoleUI
 {
     public class ExplainCommand : ICommand
     {
-        private readonly Application _app;
+        Application app;
 
-        public string Name => "explain"; public string Help => "Рассказать о команде или командах";
+        public string Name => "explain";
+        public string Help => "Рассказать о команде или командах";
+
+        public string GetDescription()
+        {
+            return "Выводит всю доступную информацию по команде или командам. Имена команд передаются как параметры";
+        }
+
         public string[] Synonyms => new string[] { "elaborate" };
-        public string GetDescription() { return "Выводит всю доступную информацию по команде или командам. Имена команд передаются как параметры"; }
 
-        public ExplainCommand(Application app) => this._app = app ?? throw new ArgumentNullException(nameof(app));
+
+        public ExplainCommand(Application app)
+        {
+            this.app = app;
+        }
         public void Execute(params string[] parameters)
         {
             foreach (var parameter in parameters)
             {
-                ICommand cmd = _app.FindCommand(parameter);
-                Console.WriteLine(Line);
+                ICommand cmd = app.FindCommand(parameter);
+                Console.WriteLine(line);
                 List<string> syns = new List<string>(cmd.Synonyms);
-                if (cmd.Name== parameter)
+                if (cmd.Name == parameter)
                 {
                     Console.WriteLine("{0}: {1}", cmd.Name, cmd.Help);
                 }
@@ -38,15 +48,15 @@ namespace ConsoleUI
                 }
                 if (cmd.GetDescription() != string.Empty)
                 {
-                    Console.WriteLine(Line1);
+                    Console.WriteLine(line1);
                     Console.WriteLine(cmd.GetDescription());
                 }
             }
-            Console.WriteLine(Line);
+            Console.WriteLine(line);
         }
 
-        private const string Line = "================================================";
-        private const string Line1 = "...............................................";
+        private const string line = "================================================";
+        private const string line1 = "...............................................";
 
     }
 

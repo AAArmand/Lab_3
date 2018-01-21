@@ -1,16 +1,18 @@
 ﻿using System;
 using ConsoleUI;
+using DrawablesUI;
 using GraphicsEditor.Figures;
+using GraphicsEditor.Figures.Data.Interfaces;
 
 namespace GraphicsEditor.Commands.FiguresInitCommands {
     class EllipseCommand : ICommand{
-        private readonly Picture _picture;
-
+        private readonly IContainer<IDrawable> _picture;
         public string Name => "ellipse"; public string Help => "Рисует эллипс в графическом интерфейсе";
         public string GetDescription() { return "Рисует эллипс. Параметры — координаты точки центра эллипса, размеры осей эллипса, угол поворота эллипса"; }
 
         public string[] Synonyms => new string[] { "oval", "egg" };
-        public EllipseCommand(Picture picture) => this._picture = picture ?? throw new ArgumentNullException(nameof(picture));
+
+        public EllipseCommand(IContainer<IDrawable> picture) => this._picture = picture ?? throw new ArgumentNullException(nameof(picture));
 
         public void Execute(params string[] parameters) {
             try {

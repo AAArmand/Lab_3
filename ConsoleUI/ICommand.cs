@@ -14,11 +14,8 @@ namespace ConsoleUI
     {
         string Name { get; }
         string Help { get; }
-
         string GetDescription();
-
         string[] Synonyms { get; }
-
         void Execute(params string[] parameters);
     }
 }

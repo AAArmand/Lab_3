@@ -1,16 +1,26 @@
+
 ﻿using System;
 using ConsoleUI;
+using DrawablesUI;
 using GraphicsEditor.Figures;
+using GraphicsEditor.Figures.Data.Interfaces;
 
 namespace GraphicsEditor.Commands.FiguresInitCommands {
     class CircleCommand : ICommand {
-        private readonly Picture _picture;
+        private readonly IContainer<IDrawable> _picture;
 
-        public string Name => "circle"; public string Help => "Рисует круг в графическом интерфейсе";
-        public string GetDescription() { return "Рисует круг. Параметры — координаты центра круга и радиус"; }
+        public string Name => "circle";
+        public string Help => "Рисует круг в графическом интерфейсе";
+
+        public string GetDescription()
+        {
+            return "Рисует круг. Параметры — координаты центра круга и радиус";
+            
+        }
 
         public string[] Synonyms => new string[] { "lap", "disk" };
-        public CircleCommand(Picture picture) => this._picture = picture ?? throw new ArgumentNullException(nameof(picture));
+        public CircleCommand(IContainer<IDrawable> picture) => this._picture = picture;
+
 
         public void Execute(params string[] parameters) {
             try {
