@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>GraphicsEditor</RootNamespace>
     <AssemblyName>GraphicsEditor</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -42,23 +43,34 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Circle.cs" />
-    <Compile Include="CircleCommand.cs" />
-    <Compile Include="ColorCommand.cs" />
-    <Compile Include="Ellipse.cs" />
-    <Compile Include="EllipseCommand.cs" />
-    <Compile Include="FormatInfo.cs" />
-    <Compile Include="IShape.cs" />
-    <Compile Include="Line.cs" />
-    <Compile Include="LineCommand.cs" />
-    <Compile Include="ListCommand.cs" />
+    <Compile Include="Commands\FiguresInitCommands\UngroupCommand.cs" />
+    <Compile Include="Commands\ShapesDataCommands\RotateCommand.cs" />
+    <Compile Include="Commands\ShapesDataCommands\ScaleCommand.cs" />
+    <Compile Include="Commands\ShapesDataCommands\TranslateCommand.cs" />
+    <Compile Include="Figures\CircleFigure.cs" />
+    <Compile Include="Commands\FiguresInitCommands\CircleCommand.cs" />
+    <Compile Include="Commands\ShapesDataCommands\ColorCommand.cs" />
+    <Compile Include="Commands\Data\CommandValidateIndex.cs" />
+    <Compile Include="Figures\CompoundFigure.cs" />
+    <Compile Include="Figures\Data\Description.cs" />
+    <Compile Include="Figures\Data\Figure.cs" />
+    <Compile Include="Figures\EllipseFigure.cs" />
+    <Compile Include="Commands\FiguresInitCommands\EllipseCommand.cs" />
+    <Compile Include="Figures\Data\FormatInfo.cs" />
+    <Compile Include="Commands\FiguresInitCommands\GroupCommand.cs" />
+    <Compile Include="Figures\Data\Interfaces\IFigure.cs" />
+    <Compile Include="Figures\Data\Interfaces\IShape.cs" />
+    <Compile Include="Figures\LineFigure.cs" />
+    <Compile Include="Commands\FiguresInitCommands\LineCommand.cs" />
+    <Compile Include="Commands\ShapesDataCommands\FiguresDataCommands\ListCommand.cs" />
     <Compile Include="Picture.cs" />
-    <Compile Include="Point.cs" />
-    <Compile Include="PointCommand.cs" />
+    <Compile Include="Figures\PointFigure.cs" />
+    <Compile Include="Commands\FiguresInitCommands\PointCommand.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RemoveCommand.cs" />
-    <Compile Include="WidthCommand.cs" />
+    <Compile Include="Commands\ShapesDataCommands\RemoveCommand.cs" />
+    <Compile Include="Figures\Data\Transformation.cs" />
+    <Compile Include="Commands\ShapesDataCommands\WidthCommand.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -73,6 +85,7 @@
       <Name>DrawablesUI</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
