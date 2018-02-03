@@ -2,7 +2,7 @@
 
 namespace GraphicsEditor.Figures.Data.Interfaces
 {
-    interface  IFigure : IShape
+    interface IFigure : IShape
     {
         string Description { get; }
 
@@ -10,5 +10,6 @@ namespace GraphicsEditor.Figures.Data.Interfaces
 
         string GenerateDescription(uint[] indexes);
 
+        void SetDescription();
     }
 }

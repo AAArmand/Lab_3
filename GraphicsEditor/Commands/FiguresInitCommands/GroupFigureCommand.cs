@@ -30,17 +30,16 @@ namespace GraphicsEditor.Commands.FiguresInitCommands {
 
             try
             {
-                if (ValidationHelper.ParametsEmptyValidator(parameters) && ValidationHelper.ContainsInContainerValidator<IFigure>(_picture, "Не нарисовано ни одной фигуры"))
+                if (ValidationHelper.ParametersEmptyValidator(parameters) && ValidationHelper.ContainsInContainerValidator<IFigure>(_picture, "Не нарисовано ни одной фигуры"))
                 {
 
-                    uint[][] indexes = IndexHelper.StringToIndexesOrFail(parameters);
-                    if (indexes != null && ValidationHelper.IndexesDistinctValidator(indexes))
+                    uint[][] indexes = IndexHelper.StringArrayToIndexesOrFail(parameters);
+                    if (indexes != null)
                     {
 
                         if (indexes.Length == 1)
                         {
-                            //почему нельзя всю логику обработки ошибок вынести во всякие валидаторы, 
-                            //как понять какую часть логики выносить в валидаторы, а какую на месте обрабатывать?
+                            
                             throw new InvalidDataException("Нельзя группировать 1 фигуру");
                         }
                         List<ShapeLocator<IFigure>> shapeLocators = new List<ShapeLocator<IFigure>>();
@@ -57,7 +56,7 @@ namespace GraphicsEditor.Commands.FiguresInitCommands {
                                 throw new InvalidDataException("Повторите ввод индексов фигур");
                             }
                         }
-                        if (!ShapeHelper<IFigure>.ParentEqualsChecker(shapeLocators))
+                        if (!ShapeLocatorsHelper<IFigure>.ParentEqualsChecker(shapeLocators))
                         {
                             throw new InvalidDataException(
                                 "Нельзя группировать фигуры из разных сгриппированных фигур");
@@ -65,7 +64,7 @@ namespace GraphicsEditor.Commands.FiguresInitCommands {
 
                         IContainer<IFigure> parent = shapeLocators.First().Parent;
 
-                        if (parent.GetAll<IFigure>().Count == shapeLocators.Count)
+                        if (parent.GetAll<IFigure>().Count == shapeLocators.Count && !parent.Equals(_picture))
                         {
                             throw new InvalidDataException(
                                 "Введенные фигуры уже сгруппированы");
@@ -79,7 +78,7 @@ namespace GraphicsEditor.Commands.FiguresInitCommands {
 
                         }
                         parent.Add(new CompoundFigure(_picture, figures));
-                        ShapeHelper<IFigure>.ContainerChecker(shapeLocators);
+                        ShapeLocatorsHelper<IFigure>.ContainerChecker(shapeLocators);
                     }
                     else
                     {

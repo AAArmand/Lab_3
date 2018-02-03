@@ -22,10 +22,10 @@ namespace GraphicsEditor.Figures {
 
         public event Action Changed;
 
-        public IReadOnlyList<TYpe> GetAll<TYpe>(){
+        public IReadOnlyList<T> GetAll<T>(){
 
             lock (_lockObject) {
-                return _figures?.OfType<TYpe>().ToList();
+                return _figures?.OfType<T>().ToList();
             }
 
         }
@@ -76,7 +76,12 @@ namespace GraphicsEditor.Figures {
 
         public void Transform(Transformation trans)
         {
-
+            lock (_lockObject) {
+                foreach (IFigure figure in _figures) {
+                    figure.Transform(trans);
+                    figure.SetDescription();
+                }
+            }
         }
 
         public override string GenerateDescription(uint[] indexes) {

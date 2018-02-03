@@ -8,12 +8,8 @@ namespace GraphicsEditor.Commands.Data
 {
     class ValidationHelper
     {
-        //разве indexHelper и indexesComparer не должны расширять ValidationHelper
-        protected const string EMPTY_ERROR = "Команда должна принимать параметры";
-        protected const string SAME_INDEX_ERROR = "Нельзя вводить одинаковые индексы несколько раз";
-
-        public static bool ParametsEmptyValidator(string[] parameters,
-            string message = EMPTY_ERROR)
+        public static bool ParametersEmptyValidator(string[] parameters,
+            string message = "Команда должна принимать параметры")
         {
             if (parameters.Length == 0)
             {
@@ -23,18 +19,16 @@ namespace GraphicsEditor.Commands.Data
             return true;
         }
 
-        public static bool IndexesDistinctValidator(uint[][] indexes,
-            string message = SAME_INDEX_ERROR)
-        {
-            if (indexes.Distinct(new IndexesComparer()).Count() != indexes.Length)
-            {
+        public static bool ParametersCountValidator(string[] parameters, uint count,
+            string message = "Неверное число параметров.") {
+            if (parameters.Length != count) {
                 Console.WriteLine(message);
                 return false;
             }
             return true;
         }
 
-        //не понял
+       
         public static bool ContainsInContainerValidator<TItem>(IContainer<TItem> container,string message) where TItem :IDrawable
             {
             if (!container.GetAll<TItem>().Any()) {

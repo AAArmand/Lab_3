@@ -1,59 +1,63 @@
 ﻿using System;
+using System.Drawing;
+using System.IO;
 using System.Linq;
+using ConsoleUI;
+using DrawablesUI;
+using GraphicsEditor.Commands.Data;
 using GraphicsEditor.Figures.Data;
 using GraphicsEditor.Figures.Data.Interfaces;
 
 namespace GraphicsEditor.Commands.FiguresDataCommands
 {
-    public class ScaleCommand
-    {
+    class ScaleCommand<TShape> : ICommand 
+        where TShape : IShape
+        {
         public string Name => "scale";
         public string Help => "масштабирование";
         public string GetDescription() { return "преобраование сжатия/растяжения/инверсии"; }
 
         public string[] Synonyms => new string[] { "scaling", "sc" };
+        private readonly IContainer<IDrawable> _picture;
 
-        public ScaleCommand(Picture picture) : base(picture) { }
+        public ScaleCommand(IContainer<IDrawable> picture) => _picture = picture;
 
         public void Execute(params string[] parameters)
         {
-            try
-            {
-                float x = float.Parse(parameters[0]);
-                float y = float.Parse(parameters[1]);
-                int[] indexes = ValidateStringIndexes(parameters.Skip(2).ToArray());
-                indexes = ValidateRepeatIndexes(indexes);
+            try {
+                if (ValidationHelper.ParametersCountValidator(parameters, 4) &&
+                    ValidationHelper.ContainsInContainerValidator<TShape>((IContainer<TShape>)_picture,
+                        "Не нарисовано ни одной фигуры")) {
 
-                if (indexes != null)
-                {
-                    int i = 0;
-                    foreach (IShape shape in Picture.Shapes)
-                    {
-                        if (indexes.Contains(i))
-                        {
-                            shape.Transform(Transformation.Scale(x, y));
+                    float x = float.Parse(parameters[0]);
+                    float y = float.Parse(parameters[1]);
+                    float coefficient = float.Parse(parameters[2]);
+                    uint[] index = IndexHelper.StringToIndexesOrFail(parameters[3]);
+
+                    if (index != null) {
+                        ShapeLocator<TShape> shape = ShapeLocator<TShape>.ParseOrFail(index, _picture);
+                        if (shape != null) {
+                            shape.Shape.Transform(Transformation.Scale(x * coefficient, y * coefficient));
+                            
+
+                        } else {
+                            throw new InvalidDataException("Повторите ввод индексов фигур");
                         }
-                        i++;
                     }
-
-                    Picture.OnChanged();
-                }
-                else
-                {
-                    throw new ArgumentException("Повторите ввод индексов фигур");
+                } else {
+                    throw new ArgumentException("Введите индексы заново");
                 }
 
-            }
-            catch (ArgumentException error)
-            {
+                _picture.OnChanged();
+
+
+            } catch (InvalidDataException error) {
                 Console.WriteLine(error.Message);
-            }
-            catch (FormatException)
-            {
+            } catch (ArgumentException error) {
+                Console.WriteLine(error.Message);
+            } catch (FormatException) {
                 Console.WriteLine("Вы ввели координату в неверном формате");
-            }
-            catch (OverflowException)
-            {
+            } catch (OverflowException) {
                 Console.WriteLine("Вы ввели слишком большое число в качестве координаты");
             }
         }

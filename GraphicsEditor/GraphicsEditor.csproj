@@ -43,8 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commands\Data\IndexesComparer.cs" />
-    <Compile Include="Commands\Data\ShapeHelper.cs" />
+    <Compile Include="Commands\Data\ShapeLocatorsHelper.cs" />
     <Compile Include="Commands\Data\ValidationHelper.cs" />
     <Compile Include="Commands\FiguresDataCommands\RotateCommand.cs" />
     <Compile Include="Commands\FiguresDataCommands\ScaleCommand.cs" />

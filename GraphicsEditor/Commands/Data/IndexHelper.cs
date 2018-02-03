@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 
+
 namespace GraphicsEditor.Commands.Data
 {
     class IndexHelper
@@ -34,15 +35,14 @@ namespace GraphicsEditor.Commands.Data
                 Console.WriteLine("Вы ввели индексы в неверном формате");
             }
             catch (OverflowException)
-            {
-                //можно парсить сразу в uint, но тогда overflowexeption выкинется в случае отрицательного числа 
+            {              
                 Console.WriteLine("Вы ввели слишком большое число в качестве индекса");
             }
             return null;
         }
         
 
-        public static uint[][] StringToIndexesOrFail(string[] parameters)
+        public static uint[][] StringArrayToIndexesOrFail(string[] parameters)
         {
             try
             {
@@ -51,12 +51,29 @@ namespace GraphicsEditor.Commands.Data
                     string[] stringIndexes = parameter.Split(Delimiter);
 
                     uint[] indexes = ValidateIndexesOrFail(stringIndexes);
-                    if (indexesMain.Contains(indexes)) {
+
+                    if (indexes == null) {
+                        return null;
+                    }
+
+                    if (indexesMain.Exists(item => Equals(item, indexes))) {
                         throw new InvalidDataException("Индекс " + IndexesToString(indexes) + " повторяется");
                     }
                     indexesMain.Add(indexes);
                 }
                 return indexesMain.ToArray();
+            } catch (InvalidDataException error) {
+                Console.WriteLine(error.Message);
+            }
+            return null;
+        }
+
+        public static uint[] StringToIndexesOrFail(string parameter) {
+            try {
+                    string[] stringIndexes = parameter.Split(Delimiter);
+
+                  
+                return ValidateIndexesOrFail(stringIndexes);
             } catch (InvalidDataException error) {
                 Console.WriteLine(error.Message);
             }
@@ -72,6 +89,18 @@ namespace GraphicsEditor.Commands.Data
         public static string IndexesToString(uint[] indexes)
         {
             return Borders[0] + String.Join(Delimiter.ToString(), indexes) + Borders[1];
+        }
+
+        public static bool Equals(uint[] x, uint[] y) {
+            if (x.Length == y.Length) {
+                for (int count = 0; count < x.Length; count++) {
+                    if (x[count] != y[count]) {
+                        return false;
+                    }
+                }
+                return true;
+            }
+            return false;
         }
     }
 }

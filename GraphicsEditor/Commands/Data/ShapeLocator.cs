@@ -6,38 +6,37 @@ using GraphicsEditor.Figures.Data.Interfaces;
 
 namespace GraphicsEditor.Commands.Data
 {
-    //что происходит
-    //заменить T на IDrawable
-    class ShapeLocator<T> where T : IDrawable
+    
+    class ShapeLocator<TDrawable> where TDrawable : IDrawable
     {
-        // фигура, которая соответствует идентификатору типа 0:1:1
-        public T Shape { get; }
+        
+        public TDrawable Shape { get; }
 
-        // "родитель" фигуры, которая соответствует идентификатору, м.б. равен null
-        public IContainer<T> GrandParent { get; set; }
+       
+        public IContainer<TDrawable> GrandParent { get; set; }
 
-        // "родитель" "родителя" фигуры которая, соответствует идентификатору, м.б. равен null
-        public IContainer<T> Parent { get; set; }
+        
+        public IContainer<TDrawable> Parent { get; set; }
 
         private static readonly object LockObject = new object();
 
-        // метод, преобразующий строку-идентификатор, разделённый двоеточиями, в объект
-        public static ShapeLocator<T> ParseOrFail(uint[] indexes, IContainer<IDrawable> picture)
+       
+        public static ShapeLocator<TDrawable> ParseOrFail(uint[] indexes, IContainer<IDrawable> picture)
         {
             lock (LockObject)
             {
                 try
                 {
-                    IContainer<T> parent = (IContainer<T>) picture;
-                    IContainer<T> grandParent = null;
+                    IContainer<TDrawable> parent = (IContainer<TDrawable>) picture;
+                    IContainer<TDrawable> grandParent = null;
                     for (uint count = 0; count < indexes.Length; count++)
                     {
-                        IReadOnlyList<T> shapes = parent.GetAll<T>();
+                        IReadOnlyList<TDrawable> shapes = parent.GetAll<TDrawable>();
                         uint index = indexes[count];
 
                         if (count < indexes.Length - 1)
                         {
-                            if (!shapes[(int) index].GetType().GetInterfaces().Contains(typeof(IContainer<T>)))
+                            if (!shapes[(int) index].GetType().GetInterfaces().Contains(typeof(IContainer<TDrawable>)))
                             {
                                 uint[] currentIndex = new uint[count + 1];
                                 Array.Copy(indexes, 0, currentIndex, 0, count + 1);
@@ -47,7 +46,7 @@ namespace GraphicsEditor.Commands.Data
                                                             IndexHelper.IndexesToString(indexes) + ")");
                             }
                             grandParent = parent;
-                            parent = (IContainer<T>) shapes[(int) index];
+                            parent = (IContainer<TDrawable>) shapes[(int) index];
                         }
                         else
                         {
@@ -56,7 +55,7 @@ namespace GraphicsEditor.Commands.Data
                                 throw new ArgumentException("Не существует фигуры с индексом " +
                                                             IndexHelper.IndexesToString(indexes));
                             }
-                            return new ShapeLocator<T>(grandParent, parent, shapes[(int) index]);
+                            return new ShapeLocator<TDrawable>(grandParent, parent, shapes[(int) index]);
                         }
                     }
                 }
@@ -68,7 +67,7 @@ namespace GraphicsEditor.Commands.Data
             return null;
         }
 
-        private ShapeLocator(IContainer<T> grandParent, IContainer<T> parent, T shape)
+        private ShapeLocator(IContainer<TDrawable> grandParent, IContainer<TDrawable> parent, TDrawable shape)
         {
             GrandParent = grandParent;
             Parent = parent;

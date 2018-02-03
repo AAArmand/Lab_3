@@ -18,11 +18,11 @@ namespace GraphicsEditor.Commands.FiguresDataCommands {
 
         public void Execute(params string[] parameters) {
             try {
-                if (ValidationHelper.ParametsEmptyValidator(parameters))
+                if (ValidationHelper.ParametersEmptyValidator(parameters))
                 {
-                    uint[][] indexes = IndexHelper.StringToIndexesOrFail(parameters);
+                    uint[][] indexes = IndexHelper.StringArrayToIndexesOrFail(parameters);
 
-                    if (indexes != null && ValidationHelper.IndexesDistinctValidator(indexes))
+                    if (indexes != null)
                     {
                         foreach (uint[] index in indexes)
                         {

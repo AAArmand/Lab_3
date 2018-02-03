@@ -12,9 +12,12 @@ namespace GraphicsEditor.Figures {
         public LineFigure(PointFigure first, PointFigure second) {
             Beginning = first;
             End = second;
-            Description = "Линия(" + first.Description + ", " + second.Description + ")";
+            SetDescription();
         }
 
+        public override void SetDescription() {
+            Description = "Линия(" + Beginning.Description + ", " + End.Description + ")";
+        }
         public void Draw(IDrawer drawer) {
             drawer.SelectPen(Format.Color, Format.Width);
             drawer.DrawLine(Beginning.Сoordinates, End.Сoordinates);
@@ -25,6 +28,7 @@ namespace GraphicsEditor.Figures {
             trans.TransformMatrix.TransformPoints(points);
             Beginning.Сoordinates = points[0];
             End.Сoordinates = points[1];
+            SetDescription();
         }
 
     }

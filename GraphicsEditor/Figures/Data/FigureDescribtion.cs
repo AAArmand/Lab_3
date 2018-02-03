@@ -19,5 +19,9 @@ namespace GraphicsEditor.Figures.Data
         {     
             return IndexHelper.IndexesToString(indexes) + " " + Description;
         }
+
+        public virtual void SetDescription() {
+           
+        }
     }
 }

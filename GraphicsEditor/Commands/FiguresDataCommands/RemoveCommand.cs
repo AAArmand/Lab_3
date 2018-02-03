@@ -26,11 +26,11 @@ namespace GraphicsEditor.Commands.FiguresDataCommands {
         {
             try
             {
-                if (ValidationHelper.ParametsEmptyValidator(parameters) && ValidationHelper.ContainsInContainerValidator<IFigure>(_picture, "Не нарисовано ни одной фигуры"))
+                if (ValidationHelper.ParametersEmptyValidator(parameters) && ValidationHelper.ContainsInContainerValidator<IFigure>(_picture, "Не нарисовано ни одной фигуры"))
                 {
-                    uint[][] indexes = IndexHelper.StringToIndexesOrFail(parameters);
+                    uint[][] indexes = IndexHelper.StringArrayToIndexesOrFail(parameters);
 
-                    if (indexes != null && ValidationHelper.IndexesDistinctValidator(indexes)) {                        
+                    if (indexes != null) {                        
                         List<ShapeLocator<IFigure>> shapeLocators = new List<ShapeLocator<IFigure>>();
 
                         foreach (uint[] index in indexes) {
@@ -41,12 +41,13 @@ namespace GraphicsEditor.Commands.FiguresDataCommands {
                                 throw new InvalidDataException("Повторите ввод индексов фигур");
                             }
                         }
-                        ShapeHelper<IFigure>.ValidateShapeLocators(shapeLocators);
+                        ShapeLocatorsHelper<IFigure>.ValidateShapeLocators(shapeLocators);
 
                         foreach (ShapeLocator<IFigure> shapeLocator in shapeLocators) {
                             shapeLocator.Parent.Remove(shapeLocator.Shape);
-                        }
-                        ShapeHelper<IFigure>.ContainerChecker(shapeLocators);
+                        }                  
+                        ShapeLocatorsHelper<IFigure>.ContainerChecker(shapeLocators);
+                        _picture.OnChanged();
                     } else {
                         throw new ArgumentException("Введите индексы заново");
                     }

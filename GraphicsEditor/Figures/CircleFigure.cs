@@ -14,18 +14,24 @@ namespace GraphicsEditor.Figures {
             Description = "Круг(" + center.Description + ", " + "Радиус = " + r + ")";
         }
 
+        public override void SetDescription() {
+            Description = "Круг(" + DotOfCenter.Description + ", " + "Радиус = " + Diametr / 2 + ")";
+        }
+
         public void Draw(IDrawer drawer) {
             drawer.SelectPen(Format.Color, Format.Width);
             SizeF sizes = new SizeF(Diametr, Diametr);
             drawer.DrawEllipseArc(DotOfCenter.Сoordinates, sizes, 0, 360, 0);
         }
 
-        public void Transform(Transformation trans) {
-            DotOfCenter.Сoordinates = new PointF(trans.TransformMatrix.OffsetX, trans.TransformMatrix.OffsetY);
-            if (trans.TransformMatrix.Elements[0] != 0)
+        public void Transform(Transformation trans)
+        {
+            DotOfCenter.Сoordinates = trans.TransformPoint(DotOfCenter.Сoordinates);
+            if (trans.TransformMatrix.Elements[0] > 1)
             {
                 Diametr = trans.TransformMatrix.Elements[0];
             }
+            SetDescription();
         }
     
     }

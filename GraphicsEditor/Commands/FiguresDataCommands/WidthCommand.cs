@@ -6,7 +6,7 @@ using GraphicsEditor.Commands.Data;
 using GraphicsEditor.Figures.Data.Interfaces;
 
 namespace GraphicsEditor.Commands.FiguresDataCommands {
-    class WidthCommand<T> : ICommand where T : IDrawable, IShape 
+    class WidthCommand<TShape> : ICommand where TShape : IShape 
         {
         private readonly IContainer<IDrawable> _picture;
         public string Name => "width";
@@ -19,17 +19,17 @@ namespace GraphicsEditor.Commands.FiguresDataCommands {
 
         public void Execute(params string[] parameters) {
             try {
-                if (ValidationHelper.ParametsEmptyValidator(parameters) && ValidationHelper.ContainsInContainerValidator(_picture, "Не нарисовано ни 1 элемента")) {
+                if (ValidationHelper.ParametersEmptyValidator(parameters) && ValidationHelper.ContainsInContainerValidator(_picture, "Не нарисовано ни 1 элемента")) {
 
-                    uint[][] indexes = IndexHelper.StringToIndexesOrFail(parameters);
+                    uint[][] indexes = IndexHelper.StringArrayToIndexesOrFail(parameters);
 
-                    if (indexes != null && ValidationHelper.IndexesDistinctValidator(indexes))
+                    if (indexes != null)
                     {
                         foreach (uint[] index in indexes)
                         {
                             try
                             {
-                                var shape = ShapeLocator<T>.ParseOrFail(index, _picture);
+                                var shape = ShapeLocator<TShape>.ParseOrFail(index, _picture);
                                 if (shape != null)
                                 {
                                     shape.Shape.Format.Width = uint.Parse(parameters[0]);

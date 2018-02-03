@@ -4,18 +4,17 @@ using DrawablesUI;
 
 namespace GraphicsEditor.Figures.Data.Interfaces
 {
-    //что ты зачем ты
-    interface IContainer<in TYpe> : IDrawable      
+    interface IContainer<in TDrawable> : IDrawable      
         {
         event Action Changed;
         IReadOnlyList<T> GetAll<T>();
-        void Remove(TYpe shape);
+        void Remove(TDrawable shape);
 
         void RemoveAt(int index);
 
-        void Add(TYpe drawable);
+        void Add(TDrawable drawable);
 
-        void Add(int index, TYpe shape);
+        void Add(int index, TDrawable shape);
         void OnChanged();
     }
 

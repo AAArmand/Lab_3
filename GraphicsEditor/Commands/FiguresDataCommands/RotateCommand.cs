@@ -1,67 +1,66 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using ConsoleUI;
+using DrawablesUI;
 using GraphicsEditor.Commands.Data;
 using GraphicsEditor.Figures.Data;
 using GraphicsEditor.Figures.Data.Interfaces;
 
 namespace GraphicsEditor.Commands.FiguresDataCommands
 {
-    public class RotateCommand
+    class RotateCommand<TShape> : ICommand where TShape : IShape
     {
         public string Name => "rotate";
         public string Help => "вращение фигуры";
         public string GetDescription() { return "вращение фигуры относительно вектора"; }
-        private Picture _picture;
-        public string[] Synonyms => new string[] { "rotation", "rot" };
+        private readonly IContainer<IDrawable> _picture;
+        public string[] Synonyms => new []{ "rotation", "rot" };
 
-        public RotateCommand(Picture picture)
-        {
-            _picture = picture;
-        }
+        public RotateCommand(IContainer<IDrawable> picture) => _picture = picture;
+        
 
         public void Execute(params string[] parameters)
         {
             try
             {
-                float x = float.Parse(parameters[0]);
-                float y = float.Parse(parameters[1]);
-                PointF point = new PointF(x, y);
-                float angle = float.Parse(parameters[2]);
-                
-                uint[][] indexes = IndexHelper.StringToIndexesOrFail(parameters.Skip(3).ToArray());
-
-                if (parameters.Length < 3)
+                if (ValidationHelper.ParametersCountValidator(parameters, 4) &&
+                    ValidationHelper.ContainsInContainerValidator<TShape>((IContainer<TShape>) _picture,
+                        "Не нарисовано ни одной фигуры"))
                 {
-                    throw new ArgumentNullException("Введите индексы фигур");
-                }
 
-                if (indexes != null)
-                {
-                    int i = 0;
-                    foreach (IShape shape in _picture.GetAll<IShape>())
+                    float x = float.Parse(parameters[0]);
+                    float y = float.Parse(parameters[1]);
+                    PointF point = new PointF(x, y);
+                    float angle = float.Parse(parameters[2]);
+                    uint[] index = IndexHelper.StringToIndexesOrFail(parameters[3]);
+
+                    if (index != null)
                     {
-                        if (i >= _picture.GetAll<IShape>().Count)
+                        ShapeLocator<TShape> shape = ShapeLocator<TShape>.ParseOrFail(index, _picture);
+                        if (shape != null)
                         {
-                            throw new ArgumentException("Не существует фигуры с индексом " + i);
-                        }
+                            shape.Shape.Transform(Transformation.RotateAt(angle, point));
 
-                        if (indexes.Contains(i))
-                        {
-                            shape.Transform(Transformation.RotateAt(angle, point));
                         }
-                        i++;
+                        else
+                        {
+                            throw new InvalidDataException("Повторите ввод индексов фигур");
+                        }
                     }
-
-                    Picture.OnChanged();
                 }
                 else
                 {
-                    throw new ArgumentException("Повторите ввод индексов фигур");
+                    throw new ArgumentException("Введите индексы заново");
                 }
 
+                _picture.OnChanged();
+           
+
             }
-            catch (ArgumentNullException error)
+            catch (InvalidDataException error)
             {
                 Console.WriteLine(error.Message);
             }
