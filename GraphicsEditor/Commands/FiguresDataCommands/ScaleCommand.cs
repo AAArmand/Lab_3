@@ -32,14 +32,17 @@ namespace GraphicsEditor.Commands.FiguresDataCommands
                     float x = float.Parse(parameters[0]);
                     float y = float.Parse(parameters[1]);
                     float coefficient = float.Parse(parameters[2]);
+                    
+                    float argX = x == 0 ? coefficient : x * coefficient;
+                    float argY = y == 0 ? coefficient : y * coefficient;
+
                     uint[] index = IndexHelper.StringToIndexesOrFail(parameters[3]);
+
 
                     if (index != null) {
                         ShapeLocator<TShape> shape = ShapeLocator<TShape>.ParseOrFail(index, _picture);
                         if (shape != null) {
-                            shape.Shape.Transform(Transformation.Scale(x * coefficient, y * coefficient));
-                            
-
+                            shape.Shape.Transform(Transformation.Scale(argX, argY));
                         } else {
                             throw new InvalidDataException("Повторите ввод индексов фигур");
                         }
