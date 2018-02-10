@@ -32,13 +32,13 @@ namespace GraphicsEditor.Figures {
 
         public void Transform(Transformation trans)
         {
-            PointF point = DotOfCenter.Сoordinates;
-            DotOfCenter.Сoordinates = trans.TransformPoint(DotOfCenter.Сoordinates); 
+            DotOfCenter.Сoordinates = new PointF(trans.TransformMatrix.OffsetX, trans.TransformMatrix.OffsetY);
             Rotate += Math.Asin(trans.TransformMatrix.Elements[1]) * 180 / Math.PI;
 
             if (trans.TransformMatrix.Elements[0] > 1)
             {
                 Sizes = new SizeF(Sizes.Width * trans.TransformMatrix.Elements[0], Sizes.Height * trans.TransformMatrix.Elements[3]);
+
             }
             SetDescription();
         }

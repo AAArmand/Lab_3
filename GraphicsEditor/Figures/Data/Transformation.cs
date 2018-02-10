@@ -26,8 +26,7 @@ namespace GraphicsEditor.Figures.Data {
         public static Transformation Scale(float scaleX, float scaleY) {
             Transformation transformation = new Transformation();
             PointF point = new PointF(scaleX, scaleY);
-            transformation.TransformPoint(point);
-            transformation.TransformMatrix.Scale(point.X, point.Y);
+            transformation.TransformMatrix.Scale(transformation[point].X, transformation[point].Y);
             return transformation;
         }
 
@@ -50,12 +49,7 @@ namespace GraphicsEditor.Figures.Data {
         }
 
         /// Для любой точки плоскости возвращает её образ
-        public PointF TransformPoint(PointF point)
-        {
-            PointF[] points = {point};
-            TransformMatrix.TransformPoints(points);
-            return points[0];
-        }
+        public PointF this[PointF point] => new PointF(Math.Abs(point.X), Math.Abs(point.Y));
 
         private Transformation() {
             TransformMatrix = new Matrix();

@@ -22,8 +22,12 @@ namespace GraphicsEditor.Figures {
             drawer.DrawPoint(Сoordinates);         
         }
 
-        public void Transform(Transformation trans) {
-            Сoordinates = trans.TransformPoint(Сoordinates);
+        public void Transform(Transformation trans)
+        {
+            PointF[] points = { Сoordinates };
+            trans.TransformMatrix.TransformPoints(points);
+            Сoordinates = points[0];
+            //Сoordinates = trans.TransformMatrix.Elements[0] > 1 ? Сoordinates : new PointF(trans.TransformMatrix.OffsetX, trans.TransformMatrix.OffsetY);
             SetDescription();
         }
     }

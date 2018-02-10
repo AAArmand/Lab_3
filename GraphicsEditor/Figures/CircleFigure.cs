@@ -26,7 +26,7 @@ namespace GraphicsEditor.Figures {
 
         public void Transform(Transformation trans)
         {
-            DotOfCenter.Сoordinates = trans.TransformPoint(DotOfCenter.Сoordinates);
+            DotOfCenter.Сoordinates = new PointF(trans.TransformMatrix.OffsetX, trans.TransformMatrix.OffsetY);
             if (trans.TransformMatrix.Elements[0] > 1)
             {
                 Diametr *= trans.TransformMatrix.Elements[0];
