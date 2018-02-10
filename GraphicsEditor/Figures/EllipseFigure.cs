@@ -38,8 +38,7 @@ namespace GraphicsEditor.Figures {
 
             if (trans.TransformMatrix.Elements[0] > 1)
             {
-                var scale = point.X / DotOfCenter.Сoordinates.X;
-                Sizes = new SizeF(Sizes.Width * scale, Sizes.Height * scale);
+                Sizes = new SizeF(Sizes.Width * trans.TransformMatrix.Elements[0], Sizes.Height * trans.TransformMatrix.Elements[3]);
             }
             SetDescription();
         }

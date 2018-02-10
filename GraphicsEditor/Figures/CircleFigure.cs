@@ -29,7 +29,7 @@ namespace GraphicsEditor.Figures {
             DotOfCenter.Сoordinates = trans.TransformPoint(DotOfCenter.Сoordinates);
             if (trans.TransformMatrix.Elements[0] > 1)
             {
-                Diametr = trans.TransformMatrix.Elements[0];
+                Diametr *= trans.TransformMatrix.Elements[0];
             }
             SetDescription();
         }
